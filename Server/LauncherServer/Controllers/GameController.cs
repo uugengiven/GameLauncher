@@ -22,6 +22,9 @@ namespace LauncherServer.Controllers
         {
             if (id > 0)
             {
+                // This is where security should happen first.
+                // Check for computer already having a game logged out
+                // Check hash against values to verify
 
                 var game = db.Games.Where(x => x.steamId == id).First();
                 var user = db.SteamUsers.Where(x => x.games.Any(g => g.id == game.id) && x.inUse == false).FirstOrDefault();
