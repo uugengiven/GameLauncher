@@ -1,6 +1,6 @@
 # Server for hosting Steam users #
 
-This project is a game launching service for LAN centers. This allows for different computers to log into games by logging computers into the specific licensing software (steam only currenty).
+This project is a game launching service for LAN centers. This allows for different computers to log into games by logging computers into the specific licensing software (Steam only currenty).
 
 ## General Usage ##
 
@@ -11,9 +11,9 @@ Client sends request to the Server requesting a valid Username and Password ex: 
 
 ``` json
 {
-  'computerkey': 'abcdef',
+  'computer_key': 'abcdef',
   'time': current time,
-  'securitycode': 'zxy',
+  'security_code': 'zxy',
 }
 ```
 
@@ -21,6 +21,7 @@ The `securitycode` is a hash made up of the computerkey, ip or shared secret, an
 
 * Failure:
   * Server responds with "No User Available for Game" (may be in use, may not have game in library)
+  * Server responds with "Invalid computer_key"
   * Server responds with "This Computer already has a user checked out"
   * Server responds with "Invalid Security" (the hash does not match)
   * Server responds with "Invalid Time" (the current time is more than 5 minutes off of server time)
@@ -41,40 +42,41 @@ Client takes Username and Password and SteamID and uses the `-login` and `-appla
 
 ## Required Functionality ##
 
-### Admin ###
+### Admin User ###
 
 * Add games to game list
-* Add steam users and their games to game list
+* Add Steam users and their games to game list
 * Admin can check user back in
 * Add computer as verified
 
 ### Client/Server Interaction ###
 
-* Request User/Pass for game [done]
+* Client checks out user/pass for game [done]
   * Check that hash is correct
-* Return user/pass to server/check in user
-* Return all games from PC
-* Prevent computer from logging out two games
+* Client checks in user/pass for game to server
+* Server checks in all games from client
+* Server prevents client from checking out another game if it's already got one checked out
 
 ### Interface/UX ###
 
 * Check status from server (do I have a game checked out)
-* Check status from clientservice (am I running a game)
-* Request game list from server (with availibility info)
+* Return my checked out game
+* Check status from client (am I running a game)
+* Request game list from server (with availability info)
+* check out a game
 
 ## API Calls ##
 
 ### Server ###
 
 * `\api`
-  * `\checkout\{id}\`
-  * `\checkin\`
-  * `\startup`
-  * `\gamelist`
-  * `\currentstatus`
+  * `\checkout\{game_id}\`
+  * `\checkin_all`
+  * `\games` - list all games and availability status
+  * `\current_status` - client calls to ask: does the server believe I have something logged out right now?
 
 ### Client Service ###
 
 * `\api`
-  * `\startSteam\{id}`
-  * `\currentstatus`
+  * `\start\steam\{game_id}`
+  * `\current_status` - interface calls to ask: does the client believe it has something logged out right now?
