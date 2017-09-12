@@ -88,6 +88,7 @@ namespace LauncherServer.Controllers
             foreach (var u in db.SteamUsers)
             {
                 u.inUse = false;
+                u.inUseBy = null;
             }
             db.SaveChanges();
 

@@ -8,6 +8,7 @@ namespace LauncherServer.Models
 {
     public class Game
     {
+        // represents a game on steam
         public int id { get; set; }
         public int steamId { get; set; }
         public string name { get; set; }
@@ -17,6 +18,7 @@ namespace LauncherServer.Models
 
     public class SteamUser
     {
+        // represents a user login for steam
         public int id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
@@ -29,6 +31,7 @@ namespace LauncherServer.Models
 
     public class Computer
     {
+        // represents a computer that can request logins
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }

@@ -17,6 +17,9 @@ namespace TestSteamLauncher
         public string StartGame(int id)
         {
             // do some look up for a user/pass
+            // Hit the server application at /api/checkout/{id}
+            // Once user/pass is returned, plug them into the StartSteam call
+
             gc.StartSteam("LFGDeadbydaylight02", "924Brookline", 381210);
             return "Started!";
         }
