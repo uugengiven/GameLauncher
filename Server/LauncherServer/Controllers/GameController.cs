@@ -18,10 +18,28 @@ namespace LauncherServer.Controllers
             return View();
         }
 
-        public JsonResult checkout(int id = 0)
+        public JsonResult checkout( string computer_key, string current_time,  int security_code = 0, int id = 0)
         {
             if (id > 0)
             {
+                var computer = db.Computers.Where(x => x.key == computer_key).First();
+
+                if (computer != null)
+                {
+                    var output = new StatusViewModel();
+                    
+                    output.status = "ok";
+                    output.message = "computer authorized";
+               
+                    return new JsonResult() { Data = output };
+                }
+                else
+                {
+                    var output = new StatusViewModel();
+                    output.status = "failed";
+                    output.message = "computer not authorized. please contact administrator";
+                    return new JsonResult() { Data = output };
+                }
                 // This is where security should happen first.
                 // Check for computer already having a game logged out
                 // Check hash against values to verify
@@ -51,23 +69,23 @@ namespace LauncherServer.Controllers
 
         public string Setup()
         {
-            var game = new Game();
+            //var game = new Game();
             //game.exe = "dota2.exe";
-            //game.name = "Dota 2";
+            //game.name = "dota 2";
             //game.steamId = 570;
             //game.users = new List<SteamUser>();
             //db.Games.Add(game);
             //db.SaveChanges();
 
             //var su = new SteamUser();
-            //su.username = "SomeDota";
+            //su.username = "somedota";
             //su.password = Encrypt("dota2");
             //su.games = new List<Game>();
             //su.games.Add(game);
             //db.SteamUsers.Add(su);
 
             //var su1 = new SteamUser();
-            //su1.username = "LFGDeadbydaylight02";
+            //su1.username = "lfgdeadbydaylight02";
             //su1.password = Encrypt("asdf");
             //su1.games = new List<Game>();
             //db.SteamUsers.Add(su1);
