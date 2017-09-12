@@ -18,7 +18,7 @@ namespace LauncherServer.Controllers
             return View();
         }
 
-        public JsonResult StartGame(int id = 0)
+        public JsonResult checkout(int id = 0)
         {
             if (id > 0)
             {

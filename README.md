@@ -80,3 +80,51 @@ Client takes Username and Password and SteamID and uses the `-login` and `-appla
 * `\api`
   * `\start\steam\{game_id}`
   * `\current_status` - interface calls to ask: does the client believe it has something logged out right now?
+
+## API In Depth ##
+
+### Server ###
+
+* `\api`
+  * `\checkout\{game_id}\`
+    * Post
+    ``` json
+    {
+      'computer_key': 'key',
+      'time': current_time,
+      'security_code': hash,
+    }
+    ```
+    * Response
+    ``` json
+    {
+      'username': 'abc',
+      'password': 'def',
+      'exe': 'somegame.exe',
+      'steamId': 123
+    }
+    ```
+    * Server should mark steam user as checked out by computer that matches computer_key
+  * `\checkin_all`
+    * Post
+    ``` json
+    {
+      'computer_key': 'key',
+      'time': current_time,
+      'security_code': hash,
+    }
+    ```
+    * Response
+    ``` json
+    {
+      'status': 'ok'
+    }
+    ```
+  * `\games` - list all games and availability status
+  * `\current_status` - client calls to ask: does the server believe I have something logged out right now?
+
+### Client Service ###
+
+* `\api`
+  * `\start\steam\{game_id}`
+  * `\current_status` - interface calls to ask: does the client believe it has something logged out right now?
