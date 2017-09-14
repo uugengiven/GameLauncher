@@ -41,7 +41,7 @@ namespace LauncherServer.Controllers
                             output.username = user.username;
                             output.password = Decrypt(user.password);
                             user.inUse = true;
-                            user.inUseBy = db.Computers.Find(1);
+                            user.inUseBy = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
                             db.SaveChanges();
                             return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                         }
@@ -79,8 +79,8 @@ namespace LauncherServer.Controllers
 
             if (DateTime.Now <= (time.AddSeconds(30)) && DateTime.Now >= (time.AddSeconds(-30)))
             {
-                var computer = db.Computers.Where(x => x.key == computer_key);
-                var users = db.SteamUsers.Where(x => x.inUseBy == computer).ToList();
+                var computer = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
+                var users = db.SteamUsers.Where(x => x.inUseBy.id == computer.id).ToList();
 
                 foreach (var i in users)
                 {
@@ -89,8 +89,8 @@ namespace LauncherServer.Controllers
                 }
                 db.SaveChanges();
                 var output = new StatusViewModel();
-                output.status = "succsess";
-                output.message = "checked in" + users.Count.ToString() + "users";
+                output.status = "success";
+                output.message = "checked in" + " " + users.Count.ToString()+ " " + "users";
                 return new JsonResult() { Data = output };
             }
             else
