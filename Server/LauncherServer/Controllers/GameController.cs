@@ -73,9 +73,33 @@ namespace LauncherServer.Controllers
             }
         }
 
-        public JsonResult checkin()
+        public JsonResult checkin(string computer_key, string current_time)
         {
+            var time = Convert.ToDateTime(current_time);
 
+            if (DateTime.Now <= (time.AddSeconds(30)) && DateTime.Now >= (time.AddSeconds(-30)))
+            {
+                var computer = db.Computers.Where(x => x.key == computer_key);
+                var users = db.SteamUsers.Where(x => x.inUseBy == computer).ToList();
+
+                foreach (var i in users)
+                {
+                    i.inUse = false;
+                    i.inUseBy = null;
+                }
+                db.SaveChanges();
+                var output = new StatusViewModel();
+                output.status = "succsess";
+                output.message = "checked in" + users.Count.ToString() + "users";
+                return new JsonResult() { Data = output };
+            }
+            else
+            {
+                var output = new StatusViewModel();
+                output.status = "failed";
+                output.message = "request timing is off";
+                return new JsonResult() { Data = output };
+            }
         }
 
         public string Setup()
