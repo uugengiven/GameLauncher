@@ -22,7 +22,7 @@ namespace LauncherServer.Controllers
         {
             if (id > 0)
             {
-                var computer = db.Computers.Where(x => x.ip == computer_key).FirstOrDefault();
+                var computer = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
 
                 if (computer != null)
                 {
@@ -71,6 +71,11 @@ namespace LauncherServer.Controllers
             {
                 return new JsonResult() { Data = "more poop", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
+        }
+
+        public JsonResult checkin()
+        {
+
         }
 
         public string Setup()
