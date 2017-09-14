@@ -22,7 +22,7 @@ namespace LauncherServer.Controllers
         {
             if (id > 0)
             {
-                var computer = db.Computers.Where(x => x.key == computer_key).First();
+                var computer = db.Computers.Where(x => x.ip == computer_key).FirstOrDefault();
 
                 if (computer != null)
                 {
@@ -69,6 +69,8 @@ namespace LauncherServer.Controllers
 
         public string Setup()
         {
+
+
             //var game = new Game();
             //game.exe = "dota2.exe";
             //game.name = "dota 2";
