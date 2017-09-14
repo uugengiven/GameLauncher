@@ -26,28 +26,37 @@ namespace LauncherServer.Controllers
 
                 if (computer != null)
                 {
-                
-                
-                    // This is where security should happen first.
-                    // Check for computer already having a game logged out
-                    // Check hash against values to verify
+                    var time = Convert.ToDateTime(current_time);
 
-                    var game = db.Games.Where(x => x.steamId == id).First();
-                    var user = db.SteamUsers.Where(x => x.games.Any(g => g.id == game.id) && x.inUse == false).FirstOrDefault();
-                    if (user != null)
+                    if (DateTime.Now <= (time.AddSeconds(30)) && DateTime.Now >= (time.AddSeconds(-30)))
                     {
-                        var output = new GameStartViewModel();
-                        output.exe = game.exe;
-                        output.steamId = game.steamId;
-                        output.username = user.username;
-                        output.password = Decrypt(user.password);
-                        user.inUse = true;
-                        user.inUseBy = db.Computers.Find(1);
-                        db.SaveChanges();
-                        return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                        var game = db.Games.Where(x => x.steamId == id).First();
+                        var user = db.SteamUsers.Where(x => x.games.Any(g => g.id == game.id) && x.inUse == false).FirstOrDefault();
+
+                        if (user != null)
+                        {
+                            var output = new GameStartViewModel();
+                            output.exe = game.exe;
+                            output.steamId = game.steamId;
+                            output.username = user.username;
+                            output.password = Decrypt(user.password);
+                            user.inUse = true;
+                            user.inUseBy = db.Computers.Find(1);
+                            db.SaveChanges();
+                            return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                        }
+                        else
+                        {
+                            return new JsonResult() { Data = "no users available", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                        }
                     }
                     else
-                        return new JsonResult() { Data = "no users available", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    {
+                        var output = new StatusViewModel();
+                        output.status = "failed";
+                        output.message = "request timing is off";
+                        return new JsonResult() { Data = output };
+                    }
                 }
                 else
                 {
@@ -56,6 +65,7 @@ namespace LauncherServer.Controllers
                     output.message = "computer not authorized. please contact administrator";
                     return new JsonResult() { Data = output };
                 }
+
             }
             else
             {
