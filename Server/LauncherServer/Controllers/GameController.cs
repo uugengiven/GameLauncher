@@ -40,6 +40,7 @@ namespace LauncherServer.Controllers
                             output.steamId = game.steamId;
                             output.username = user.username;
                             output.password = Decrypt(user.password);
+                            output.status = "ok";
                             user.inUse = true;
                             user.inUseBy = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
                             db.SaveChanges();
@@ -47,6 +48,8 @@ namespace LauncherServer.Controllers
                         }
                         else
                         {
+                            var output = new StatusViewModel();
+                            output.status = "failed";
                             return new JsonResult() { Data = "no users available", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                         }
                     }

@@ -32,21 +32,29 @@ namespace TestSteamLauncher
 
             var response = client.PostAsync(URL, content).Result;
 
+
+
             var responseString = response.Content.ReadAsStringAsync().Result;
             dynamic obj = JsonConvert.DeserializeObject<dynamic>(responseString);
+            if (obj.status == "ok") 
+            {
+                // do some look up for a user/pass
+                string user = obj.username;
+                string pass = obj.password;
 
+                // web request to server to return valid user/pass
 
-            // do some look up for a user/pass
-            string user = obj.username;
-            string pass = obj.password;
+                // Hit the server application at /api/checkout/{id}
+                // Once user/pass is returned, plug them into the StartSteam call
 
-            // web request to server to return valid user/pass
-
-            // Hit the server application at /api/checkout/{id}
-            // Once user/pass is returned, plug them into the StartSteam call
-            
-            gc.StartSteam(user, pass, id);
-            return "Started!";
+                gc.StartSteam(user, pass, id);
+                return "Started!";
+            }
+        
+            else 
+            {
+                return "failed";
+            }
         }
     }
 }
