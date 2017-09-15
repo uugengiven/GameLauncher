@@ -16,5 +16,7 @@ namespace TestSteamLauncher.classes
             string steamExe = Registry.GetValue(regKey, "SteamExe", "").ToString();
             return Process.Start(steamExe, $"-login {user} {pass} -applaunch {gameId}");
         }
+
+        
     }
 }

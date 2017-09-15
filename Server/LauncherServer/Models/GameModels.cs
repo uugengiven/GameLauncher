@@ -58,6 +58,7 @@ namespace LauncherServer.Models
         public string password { get; set; }
         public string exe { get; set; }
         public int steamId { get; set; }
+        public string status { get; set; }
     }
 
     public class StatusViewModel
