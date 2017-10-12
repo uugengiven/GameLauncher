@@ -145,8 +145,8 @@ namespace LauncherServer.Controllers
 
 
 
-            var user = db.SteamUsers.Find(1);
-            user.password = Encrypt("mwk318");
+            //var user = db.SteamUsers.Find(1);
+            //user.password = Encrypt("mwk318");
             
             foreach (var u in db.SteamUsers)
             {
