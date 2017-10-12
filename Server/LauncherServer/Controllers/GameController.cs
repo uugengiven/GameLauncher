@@ -28,7 +28,7 @@ namespace LauncherServer.Controllers
                 {
                     var time = Convert.ToDateTime(current_time);
 
-                    if (DateTime.Now <= (time.AddSeconds(30)) && DateTime.Now >= (time.AddSeconds(-30)))
+                    if (DateTime.Now <= (time.AddSeconds(10000)) && DateTime.Now >= (time.AddSeconds(-10000)))
                     {
                         var game = db.Games.Where(x => x.steamId == id).First();
                         var user = db.SteamUsers.Where(x => x.games.Any(g => g.id == game.id) && x.inUse == false).FirstOrDefault();
@@ -80,7 +80,7 @@ namespace LauncherServer.Controllers
         {
             var time = Convert.ToDateTime(current_time);
 
-            if (DateTime.Now <= (time.AddSeconds(30)) && DateTime.Now >= (time.AddSeconds(-30)))
+            if (DateTime.Now <= (time.AddSeconds(10000)) && DateTime.Now >= (time.AddSeconds(-10000)))
             {
                 var computer = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
                 var users = db.SteamUsers.Where(x => x.inUseBy.id == computer.id).ToList();
@@ -143,6 +143,11 @@ namespace LauncherServer.Controllers
             //su1.games.Add(game);
             //db.SaveChanges();
 
+
+
+            var user = db.SteamUsers.Find(1);
+            user.password = Encrypt("mwk318");
+            
             foreach (var u in db.SteamUsers)
             {
                 u.inUse = false;
