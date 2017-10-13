@@ -104,10 +104,58 @@ namespace LauncherServer.Controllers
                 return new JsonResult() { Data = output };
             }
         }
+      //Remember to Add in List of Users to include
+        [HttpPost]
+      
+        public string Create ([Bind(Include = "steamId,name,exe")] Game game)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Games.Add(game);
+                db.SaveChanges();
+                return "game added";
+            }
+
+            return "could not add game";
+        }
+
+        public string Delete (int id)
+        {
+            Game game = db.Games.Find(id);
+            if (game != null)
+            {
+                db.Games.Remove(game);
+                db.SaveChanges();
+
+                return "game deleted";
+            }
+
+            return "error: game not found";
+        }
+
+        // GET:
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Employee employee = db.Employees.Find(id);
+        //    if (employee == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(employee);
+        //}
+
+        // POST: /Employee/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        
 
         public string Setup()
         {
-
 
             //var game = new Game();
             //game.exe = "dota2.exe";
