@@ -119,7 +119,7 @@ namespace LauncherServer.Controllers
             return "could not add game";
         }
 
-        public string Delete (int id)
+        public string Delete(int id)
         {
             Game game = db.Games.Find(id);
             if (game != null)
