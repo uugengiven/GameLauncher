@@ -107,7 +107,7 @@ namespace LauncherServer.Controllers
       //Remember to Add in List of Users to include
         [HttpPost]
       
-        public string Create ([Bind(Include = "steamId,name,exe")] Game game)
+        public string CreateGame ([Bind(Include = "steamId,name,exe")] Game game)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +119,7 @@ namespace LauncherServer.Controllers
             return "could not add game";
         }
 
-        public string Delete(int id)
+        public string DeleteGame (int id)
         {
             Game game = db.Games.Find(id);
             if (game != null)
@@ -131,6 +131,31 @@ namespace LauncherServer.Controllers
             }
 
             return "error: game not found";
+        }
+
+        public string CreateSteamUser ([Bind(Include = "username,password")] SteamUser steamuser)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SteamUsers.Add(steamuser);
+                db.SaveChanges();
+                return "User added";
+            }
+
+            return "could not add User";
+        }
+
+        public string DeleteSteamUser (int id)
+        {
+            SteamUser steamuser = db.SteamUsers.Find(id);
+            if (steamuser != null)
+            {
+                db.SteamUsers.Remove(steamuser);
+                db.SaveChanges();
+
+                return "User";
+            }
+            return "error: User not found";
         }
 
         // GET:
