@@ -153,11 +153,36 @@ namespace LauncherServer.Controllers
                 db.SteamUsers.Remove(steamuser);
                 db.SaveChanges();
 
-                return "User";
+                return "User added";
             }
             return "error: User not found";
         }
 
+
+        public string CreateComputer([Bind(Include = "name,ip,key,authorized")] Computer computer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Computers.Add(computer);
+                db.SaveChanges();
+                return "Computer added";
+            }
+
+            return "could not add Computer";
+        }
+
+        public string DeleteComputer(int id)
+        {
+            Computer computer = db.Computers.Find(id);
+            if (computer != null)
+            {
+                db.Computers.Remove(computer);
+                db.SaveChanges();
+
+                return "Computer added";
+            }
+            return "error: Computer not found";
+        }
         // GET:
         //public ActionResult Edit(int? id)
         //{
