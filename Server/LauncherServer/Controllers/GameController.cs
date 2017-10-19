@@ -58,7 +58,7 @@ namespace LauncherServer.Controllers
                         var output = new StatusViewModel();
                         output.status = "failed";
                         output.message = "request timing is off";
-                        return new JsonResult() { Data = output };
+                        return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                     }
                 }
                 else
@@ -66,7 +66,7 @@ namespace LauncherServer.Controllers
                     var output = new StatusViewModel();
                     output.status = "failed";
                     output.message = "computer not authorized. please contact administrator";
-                    return new JsonResult() { Data = output };
+                    return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                 }
 
             }

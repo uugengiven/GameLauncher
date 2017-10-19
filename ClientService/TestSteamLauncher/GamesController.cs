@@ -16,7 +16,7 @@ namespace TestSteamLauncher
     {
         private GameCommand gc = new GameCommand();
 
-        [HttpGet]
+        
         public string StartGame(int id)
         {
 
