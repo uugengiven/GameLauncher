@@ -6,12 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Jose;
 using System.Security.Cryptography;
+using LauncherServerClasses;
 
 namespace LauncherServer.Controllers
 {
     public class GameController : Controller
     {
         LauncherDbContext db = new LauncherDbContext();
+        Encryption encryption = new Encryption(); 
         // GET: Game
         public ActionResult Index()
         {
@@ -20,12 +22,34 @@ namespace LauncherServer.Controllers
 
         public JsonResult checkout( string computer_key, string current_time,  int security_code = 0, int id = 0)
         {
+            // List of checks to verify that a user can be checked out
+            // computer key exists - done
+            // computer key is enabled - done
+            // computer key does not have another game checked out - done
+            // time is within given parameters
+            // game exists
+            // user with game is available
+
             if (id > 0)
             {
                 var computer = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
 
-                if (computer != null)
+                if (computer != null) // computer key exists check
                 {
+                    if (computer.authorized == false) // computer authorized check
+                    {
+                        var output = new StatusViewModel();
+                        output.status = "failed";
+                        output.message = "computer not authorized. please contact administrator";
+                        return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+                    if (db.SteamUsers.Where(x=> x.inUseBy.id == computer.id).Count() > 0) // no users already checked out check
+                    {
+                        var output = new StatusViewModel();
+                        output.status = "failed";
+                        output.message = "This computer already has a user checked out. please contact administrator";
+                        return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
                     var time = Convert.ToDateTime(current_time);
 
                     if (DateTime.Now <= (time.AddSeconds(10000)) && DateTime.Now >= (time.AddSeconds(-10000)))
@@ -39,7 +63,7 @@ namespace LauncherServer.Controllers
                             output.exe = game.exe;
                             output.steamId = game.steamId;
                             output.username = user.username;
-                            output.password = Decrypt(user.password);
+                            output.password = encryption.Decrypt(user.password);
                             output.status = "ok";
                             user.inUse = true;
                             user.inUseBy = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
@@ -50,7 +74,8 @@ namespace LauncherServer.Controllers
                         {
                             var output = new StatusViewModel();
                             output.status = "failed";
-                            return new JsonResult() { Data = "no users available", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                            output.message = "no users available";
+                            return new JsonResult() { Data = output, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                         }
                     }
                     else
@@ -72,7 +97,7 @@ namespace LauncherServer.Controllers
             }
             else
             {
-                return new JsonResult() { Data = "more poop", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return new JsonResult() { Data = "invalid game request", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
 
@@ -217,7 +242,7 @@ namespace LauncherServer.Controllers
 
             //var su = new SteamUser();
             //su.username = "somedota";
-            //su.password = Encrypt("dota2");
+            //su.password = encryption.Encrypt("dota2");
             //su.games = new List<Game>();
             //su.games.Add(game);
             //db.SteamUsers.Add(su);
@@ -244,8 +269,8 @@ namespace LauncherServer.Controllers
 
 
             //var user = db.SteamUsers.Find(1);
-            //user.password = Encrypt("mwk318");
-            
+            //user.password = encryption.Encrypt("mwk318");
+
             foreach (var u in db.SteamUsers)
             {
                 u.inUse = false;
@@ -256,26 +281,7 @@ namespace LauncherServer.Controllers
             return "ok";
         }
 
-        public string Encrypt(string value)
-        {
-            var secretKey = new byte[] { 164, 60, 194, 0, 161, 189, 41, 38, 130, 89, 141, 164, 45, 170, 159, 209, 69, 137, 243, 216, 191, 131, 47, 250, 32, 107, 231, 117, 37, 158, 225, 234 };
-            return Jose.JWT.Encode(value, secretKey, JwsAlgorithm.HS256);
-        }
 
-        public string Decrypt(string value)
-        {
-            var secretKeybit = "pDzCAKG9KSaCWY2kLaqf0UWJ89i/gy/6IGvndSWe4eo=";
-            var secretKey = System.Convert.FromBase64String(secretKeybit);
-            return Jose.JWT.Decode(value, secretKey, JwsAlgorithm.HS256);
-        }
-
-        public string getSalt(int max_length)
-        {
-            var random = new RNGCryptoServiceProvider();
-            byte[] salt = new byte[max_length];
-            random.GetBytes(salt);
-            return Convert.ToBase64String(salt);
-        }
 
     }
 }

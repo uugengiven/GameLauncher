@@ -332,6 +332,12 @@
       <DependentUpon>201709071714114_addSalt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackendClasses\BackendClasses.csproj">
+      <Project>{610c9801-826f-4a43-bda9-950a0a1e380e}</Project>
+      <Name>BackendClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
