@@ -203,9 +203,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ComputersController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SteamUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -295,6 +298,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Games\Create.cshtml" />
+    <Content Include="Views\Games\Delete.cshtml" />
+    <Content Include="Views\Games\Details.cshtml" />
+    <Content Include="Views\Games\Edit.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\SteamUsers\Create.cshtml" />
+    <Content Include="Views\SteamUsers\Delete.cshtml" />
+    <Content Include="Views\SteamUsers\Details.cshtml" />
+    <Content Include="Views\SteamUsers\Edit.cshtml" />
+    <Content Include="Views\SteamUsers\Index.cshtml" />
+    <Content Include="Views\Computers\Create.cshtml" />
+    <Content Include="Views\Computers\Delete.cshtml" />
+    <Content Include="Views\Computers\Details.cshtml" />
+    <Content Include="Views\Computers\Edit.cshtml" />
+    <Content Include="Views\Computers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

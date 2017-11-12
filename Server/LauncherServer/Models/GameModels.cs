@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,7 @@ namespace LauncherServer.Models
         // represents a user login for steam
         public int id { get; set; }
         public string username { get; set; }
+        [DataType(DataType.Password)]
         public string password { get; set; }
         public string salt { get; set; }
         public bool inUse { get; set; }
