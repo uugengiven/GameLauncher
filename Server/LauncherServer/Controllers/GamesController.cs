@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LauncherServer.Models;
+using Newtonsoft.Json;
 
 namespace LauncherServer.Controllers
 {
@@ -83,7 +84,7 @@ namespace LauncherServer.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(game).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges();              
                 return RedirectToAction("Index");
             }
             return View(game);
@@ -113,6 +114,17 @@ namespace LauncherServer.Controllers
             db.Games.Remove(game);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AllGames()
+        {
+            var result = JsonConvert.SerializeObject(db.Games.ToList(), Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return Content(result, "application/json");
         }
 
         protected override void Dispose(bool disposing)

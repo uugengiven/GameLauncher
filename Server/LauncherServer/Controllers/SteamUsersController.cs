@@ -82,11 +82,30 @@ namespace LauncherServer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,username,password,inUse")] SteamUser steamUser)
+        public ActionResult Edit([Bind(Include = "id,username,password,inUse")] SteamUser steamUser, int[] game_ids, bool update_password = false)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(steamUser).State = EntityState.Modified;
+                SteamUser user = db.SteamUsers.Find(steamUser.id);
+                user.username = steamUser.username;
+                user.inUse = steamUser.inUse;
+                if (update_password)
+                {
+                    user.password = encyrption.Encrypt(steamUser.password);
+                }
+                
+                if (user.games == null)
+                {
+                    user.games = new List<Game>();
+                }
+                else
+                { 
+                user.games.Clear();
+                    }
+                foreach(int id in game_ids)
+                {
+                    user.games.Add(db.Games.Find(id));
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
