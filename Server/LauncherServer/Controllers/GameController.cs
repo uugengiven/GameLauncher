@@ -66,6 +66,7 @@ namespace LauncherServer.Controllers
                             output.steamId = game.steamId;
                             output.username = user.username;
                             output.password = encryption.Decrypt(user.password);
+                            output.password = encryption.Decrypt(output.password, user.salt);
                             output.status = "ok";
                             user.inUse = true;
                             user.inUseBy = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();

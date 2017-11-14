@@ -38,7 +38,8 @@ namespace LauncherServer.Models
         public string name { get; set; }
         public string description { get; set; }
         public string ip { get; set; }
-        public string key { get; set; }
+        public string key { get; set; } // for api calls
+        public string secret { get; set; } // for encoding the password for on the fly (needed?)
         public bool authorized { get; set; }
     }
 

@@ -15,7 +15,7 @@ namespace LauncherServer.Controllers
     public class SteamUsersController : Controller
     {
         private LauncherDbContext db = new LauncherDbContext();
-        private Encryption encyrption = new Encryption(ConfigurationManager.AppSettings["CryptKey"]);
+        private Encryption encryption = new Encryption(ConfigurationManager.AppSettings["CryptKey"]);
 
         // GET: SteamUsers
         public ActionResult Index()
@@ -53,8 +53,9 @@ namespace LauncherServer.Controllers
         {
             if (ModelState.IsValid)
             {
-                steamUser.salt = encyrption.getSalt(32);
-                steamUser.password = encyrption.Encrypt(steamUser.password);
+                steamUser.salt = encryption.getSalt(32);
+                steamUser.password = encryption.Encrypt(steamUser.password, steamUser.salt);
+                steamUser.password = encryption.Encrypt(steamUser.password);
                 db.SteamUsers.Add(steamUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,7 +93,8 @@ namespace LauncherServer.Controllers
                 user.inUse = steamUser.inUse;
                 if (update_password)
                 {
-                    user.password = encyrption.Encrypt(steamUser.password);
+                    user.password = encryption.Encrypt(steamUser.password, steamUser.salt);
+                    user.password = encryption.Encrypt(steamUser.password);
                 }
                 
                 if (user.games == null)

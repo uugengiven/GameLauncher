@@ -53,7 +53,8 @@ namespace LauncherServer.Controllers
         {
             if (ModelState.IsValid)
             {
-                computer.key = encryption.getSalt(32);
+                computer.key = encryption.GetUniqueKey(16);
+                computer.secret = encryption.getSalt(32);
                 db.Computers.Add(computer);
                 db.SaveChanges();
                 return RedirectToAction("Index");

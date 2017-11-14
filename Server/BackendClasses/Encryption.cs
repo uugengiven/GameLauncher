@@ -19,16 +19,26 @@ namespace LauncherServerClasses
             secretKeybit = key;
         }
 
+        public string Encrypt(string value, string key)
+        {
+            var secretKey = System.Convert.FromBase64String(key);
+            return Jose.JWT.Encode(value, secretKey, JwsAlgorithm.HS256);
+        }
+
         public string Encrypt(string value)
         {
-            var secretKey = System.Convert.FromBase64String(secretKeybit);
-            return Jose.JWT.Encode(value, secretKey, JwsAlgorithm.HS256);
+            return Encrypt(value, secretKeybit);
+        }
+
+        public string Decrypt(string value, string key)
+        {
+            var secretKey = System.Convert.FromBase64String(key);
+            return Jose.JWT.Decode(value, secretKey, JwsAlgorithm.HS256);
         }
 
         public string Decrypt(string value)
         {
-            var secretKey = System.Convert.FromBase64String(secretKeybit);
-            return Jose.JWT.Decode(value, secretKey, JwsAlgorithm.HS256);
+            return Decrypt(value, secretKeybit);
         }
 
         public string getSalt(int max_length)
@@ -37,6 +47,24 @@ namespace LauncherServerClasses
             byte[] salt = new byte[max_length];
             random.GetBytes(salt);
             return Convert.ToBase64String(salt);
+        }
+
+        public string GetUniqueKey(int maxSize)
+        {
+            char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data); // unsure why this is here, maybe to cause an extra call to the rng? (came from https://stackoverflow.com/questions/1344221/how-can-i-generate-random-alphanumeric-strings-in-c )
+                data = new byte[maxSize];
+                crypto.GetNonZeroBytes(data);
+            }
+            StringBuilder result = new StringBuilder(maxSize);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+            return result.ToString();
         }
     }
 }
