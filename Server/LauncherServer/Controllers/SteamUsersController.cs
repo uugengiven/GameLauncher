@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using LauncherServer.Models;
 using LauncherServerClasses;
+using System.Configuration;
 
 namespace LauncherServer.Controllers
 {
     public class SteamUsersController : Controller
     {
         private LauncherDbContext db = new LauncherDbContext();
-        private Encryption encyrption = new Encryption();
+        private Encryption encyrption = new Encryption(ConfigurationManager.AppSettings["CryptKey"]);
 
         // GET: SteamUsers
         public ActionResult Index()

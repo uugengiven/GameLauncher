@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using LauncherServer.Models;
 using LauncherServerClasses;
+using System.Configuration;
 
 namespace LauncherServer.Controllers
 {
     public class ComputersController : Controller
     {
         private LauncherDbContext db = new LauncherDbContext();
-        private Encryption encryption = new Encryption();
+        private Encryption encryption = new Encryption(ConfigurationManager.AppSettings["CryptKey"]);
 
         // GET: Computers
         public ActionResult Index()

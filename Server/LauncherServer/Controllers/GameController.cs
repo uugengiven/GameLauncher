@@ -7,13 +7,15 @@ using System.Web.Mvc;
 using Jose;
 using System.Security.Cryptography;
 using LauncherServerClasses;
+using System.Configuration;
 
 namespace LauncherServer.Controllers
 {
     public class GameController : Controller
     {
         LauncherDbContext db = new LauncherDbContext();
-        Encryption encryption = new Encryption(); 
+        Encryption encryption = new Encryption(ConfigurationManager.AppSettings["CryptKey"]); 
+
         // GET: Game
         public ActionResult Index()
         {
@@ -52,7 +54,7 @@ namespace LauncherServer.Controllers
                     }
                     var time = Convert.ToDateTime(current_time);
 
-                    if (DateTime.Now <= (time.AddSeconds(10000)) && DateTime.Now >= (time.AddSeconds(-10000)))
+                    if (CheckTime(current_time))
                     {
                         var game = db.Games.Where(x => x.steamId == id).First();
                         var user = db.SteamUsers.Where(x => x.games.Any(g => g.id == game.id) && x.inUse == false).FirstOrDefault();
@@ -103,9 +105,9 @@ namespace LauncherServer.Controllers
 
         public JsonResult checkin(string computer_key, string current_time)
         {
-            var time = Convert.ToDateTime(current_time);
+            
 
-            if (DateTime.Now <= (time.AddSeconds(10000)) && DateTime.Now >= (time.AddSeconds(-10000)))
+            if (CheckTime(current_time))
             {
                 var computer = db.Computers.Where(x => x.key == computer_key).FirstOrDefault();
                 var users = db.SteamUsers.Where(x => x.inUseBy.id == computer.id).ToList();
@@ -131,7 +133,6 @@ namespace LauncherServer.Controllers
         }
       //Remember to Add in List of Users to include
         [HttpPost]
-      
         public string CreateGame ([Bind(Include = "steamId,name,exe")] Game game)
         {
             if (ModelState.IsValid)
@@ -227,8 +228,6 @@ namespace LauncherServer.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
-
         public string Setup()
         {
 
@@ -281,6 +280,11 @@ namespace LauncherServer.Controllers
             return "ok";
         }
 
+        private bool CheckTime(string string_time)
+        {
+            var time = Convert.ToDateTime(string_time);
+            return DateTime.Now <= (time.AddSeconds(10000)) && DateTime.Now >= (time.AddSeconds(-10000));
+        }
 
 
     }

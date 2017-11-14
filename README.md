@@ -53,9 +53,9 @@ Client takes Username and Password and SteamID and uses the `-login` and `-appla
 
 * Client checks out user/pass for game [done]
   * Check that hash is correct
-* Client checks in user/pass for game to server
-* Server checks in all games from client
-* Server prevents client from checking out another game if it's already got one checked out
+* Client checks in user/pass for game to server [done]
+* Server checks in all games from client [done]
+* Server prevents client from checking out another game if it's already got one checked out [done]
 
 ### Interface/UX ###
 
