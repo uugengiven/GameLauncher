@@ -11,9 +11,9 @@ Client sends request to the Server requesting a valid Username and Password ex: 
 
 ``` json
 {
-  'computer_key': 'abcdef',
-  'time': current time,
-  'security_code': 'zxy',
+  "computer_key": "abcdef",
+  "time": "current time",
+  "security_code": "zxy",
 }
 ```
 
@@ -31,10 +31,10 @@ The `securitycode` is a hash made up of the computerkey, ip or shared secret, an
 
 ``` json
 {
-  'username': 'abc',
-  'password': 'def',
-  'exe': 'somegame.exe',
-  'steamId': 123
+  "username": "abc",
+  "password": "def",
+  "exe": "somegame.exe",
+  "steamId": 123
 }
 ```
 
@@ -90,18 +90,18 @@ Client takes Username and Password and SteamID and uses the `-login` and `-appla
     * Post
     ``` json
     {
-      'computer_key': 'key',
-      'time': current_time,
-      'security_code': hash,
+      "computer_key": "key",
+      "time": "current_time",
+      "security_code": "hash",
     }
     ```
     * Response
     ``` json
     {
-      'username': 'abc',
-      'password': 'def',
-      'exe': 'somegame.exe',
-      'steamId': 123
+      "username": "abc",
+      "password": "def",
+      "exe": "somegame.exe",
+      "steamId": 123
     }
     ```
     * Server should mark steam user as checked out by computer that matches computer_key
@@ -109,15 +109,15 @@ Client takes Username and Password and SteamID and uses the `-login` and `-appla
     * Post
     ``` json
     {
-      'computer_key': 'key',
-      'time': current_time,
-      'security_code': hash,
+      "computer_key": "key",
+      "time": "current_time",
+      "security_code": "hash",
     }
     ```
     * Response
     ``` json
     {
-      'status': 'ok'
+      "status": "ok"
     }
     ```
   * `\games` - list all games and availability status
