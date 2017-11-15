@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherServer", "LauncherS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendClasses", "BackendClasses\BackendClasses.csproj", "{610C9801-826F-4A43-BDA9-950A0A1E380E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherClient", "LauncherClient\LauncherClient.csproj", "{765601F8-28F0-429A-BFF8-354A2E3021FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherClasses", "LauncherClasses\LauncherClasses.csproj", "{F6A4E845-16B4-4725-81DE-48C7A954C49E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{610C9801-826F-4A43-BDA9-950A0A1E380E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{610C9801-826F-4A43-BDA9-950A0A1E380E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{610C9801-826F-4A43-BDA9-950A0A1E380E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765601F8-28F0-429A-BFF8-354A2E3021FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765601F8-28F0-429A-BFF8-354A2E3021FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765601F8-28F0-429A-BFF8-354A2E3021FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765601F8-28F0-429A-BFF8-354A2E3021FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6A4E845-16B4-4725-81DE-48C7A954C49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6A4E845-16B4-4725-81DE-48C7A954C49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6A4E845-16B4-4725-81DE-48C7A954C49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6A4E845-16B4-4725-81DE-48C7A954C49E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
