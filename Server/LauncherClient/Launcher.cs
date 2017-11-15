@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LauncherClient.Owin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,14 @@ namespace LauncherClient
 {
     public partial class Launcher : Form
     {
+        private ApiHost host;
+
         public Launcher()
         {
             InitializeComponent();
+
+            host = new ApiHost();
+            host.StartHost();
 
         }
 

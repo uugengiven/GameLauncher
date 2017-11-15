@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace LauncherClient.Controllers
+namespace LauncherClient.Owin.Controllers
 {
-    class GamesController : ApiController
+    public class GamesController : ApiController
     {
         private GameCommand gc = new GameCommand();
 
-
+        [HttpGet]
         public string StartGame(int id)
         {
 
@@ -20,6 +20,12 @@ namespace LauncherClient.Controllers
             SteamGame game = gc.GetSteamLogin(id, URL, "12345", "");
 
             gc.StartSteam(game);
+            return "ok";
+        }
+
+        [HttpGet]
+        public string Test()
+        {
             return "ok";
         }
     }
