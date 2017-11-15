@@ -37,7 +37,20 @@ namespace LauncherClient
             {
                 Hide();
                 notifyIcon.Visible = true;
-                notifyIcon.ShowBalloonTip(1000);
+            }
+        }
+
+        private void game_start_timer_Tick(object sender, EventArgs e)
+        {
+            if(LauncherInfo.gameIsNew)
+            {
+                if (LauncherInfo.game.status == "ok")
+                {
+                    notifyIcon.BalloonTipTitle = "Game Started";
+                    notifyIcon.BalloonTipText = LauncherInfo.game.name;
+                    notifyIcon.ShowBalloonTip(1000);
+                }
+                LauncherInfo.gameIsNew = false;
             }
         }
     }

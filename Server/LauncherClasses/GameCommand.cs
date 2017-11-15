@@ -19,6 +19,11 @@ namespace LauncherClasses
             return Process.Start(steamExe, $"-login {game.username} {game.password} -applaunch {game.id}");
         }
 
+        public void StopSteam()
+        {
+            Process.Start("taskkill", "/F /IM steam.exe");
+        }
+
         public SteamGame GetSteamLogin(int id, string URL, string computer_key, string secret)
         {
             SteamGame game = new SteamGame();
@@ -28,7 +33,7 @@ namespace LauncherClasses
             var values = new Dictionary<string, string>
                 {
                    { "computer_key", computer_key },
-                   { "current_time", DateTime.Now.ToString() }
+                   { "current_time", DateTime.Now.ToString()}
                 };
 
             var content = new FormUrlEncodedContent(values);

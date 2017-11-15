@@ -17,10 +17,14 @@ namespace LauncherClient.Owin.Controllers
         {
 
             string URL = $"http://localhost:61016/game/checkout/{id}";
-            SteamGame game = gc.GetSteamLogin(id, URL, "12345", "");
+            SteamGame game = gc.GetSteamLogin(id, URL, "SPGUWbS0csxjk6lk", "");
+            if (game.status == "ok")
+            {
+                LauncherInfo.StartGame(game);
 
-            gc.StartSteam(game);
-            return "ok";
+                gc.StartSteam(LauncherInfo.game);
+            }
+            return game.status;
         }
 
         [HttpGet]

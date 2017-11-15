@@ -95,7 +95,7 @@ namespace LauncherServer.Controllers
                 if (update_password)
                 {
                     user.password = encryption.Encrypt(steamUser.password, user.salt);
-                    user.password = encryption.Encrypt(steamUser.password);
+                    user.password = encryption.Encrypt(user.password);
                 }
                 
                 if (user.games == null)

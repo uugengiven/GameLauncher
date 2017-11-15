@@ -64,6 +64,7 @@ namespace LauncherServer.Controllers
                             var output = new GameStartViewModel();
                             output.exe = game.exe;
                             output.steamId = game.steamId;
+                            output.name = game.name;
                             output.username = user.username;
                             output.password = encryption.Decrypt(user.password);
                             output.password = encryption.Decrypt(output.password, user.salt);
