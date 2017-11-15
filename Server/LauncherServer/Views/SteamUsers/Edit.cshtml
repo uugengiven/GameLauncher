@@ -87,7 +87,6 @@
                 data.map(function (game) { 
                     games.append(`<li id="game-${game.id}"><span id="gamespan-${game.id}" class="fa fa-close">${game.name}</span></li>`);
                     $(`#gamespan-${game.id}`).click(function () { Toggle(game.id); });
-                    console.log(`<li id="${game.id}">${game.name}</li>`);
                     });
             }
         });
