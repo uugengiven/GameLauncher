@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Configuration;
 
 namespace LauncherClient.Owin.Controllers
 {
@@ -15,9 +16,11 @@ namespace LauncherClient.Owin.Controllers
         [HttpGet]
         public string StartGame(int id)
         {
+            string baseURL = ConfigurationManager.AppSettings["BaseURL"];
+            string computerKey = ConfigurationManager.AppSettings["BaseURL"];
 
-            string URL = $"http://localhost:61016/game/checkout/{id}";
-            SteamGame game = gc.GetSteamLogin(id, URL, "SPGUWbS0csxjk6lk", "");
+            string URL = $"{baseURL}/game/checkout/{id}";
+            SteamGame game = gc.GetSteamLogin(id, URL, computerKey, "");
             if (game.status == "ok")
             {
                 LauncherInfo.StartGame(game);

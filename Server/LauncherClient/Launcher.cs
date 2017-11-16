@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -52,6 +53,21 @@ namespace LauncherClient
                 }
                 LauncherInfo.gameIsNew = false;
             }
+        }
+
+        public void SetConfigValue(string key, string value)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = value;
+            configuration.AppSettings.SectionInformation.ProtectSection(null);
+            configuration.Save();
+
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SetConfigValue("Secret", "12345");
         }
     }
 }
