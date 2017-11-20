@@ -29,21 +29,13 @@ namespace LauncherClasses
             SteamGame game = new SteamGame();
             game.id = id;
             
-            HttpClient client = new HttpClient();
             var values = new Dictionary<string, string>
                 {
                    { "computer_key", computer_key },
                    { "current_time", DateTime.Now.ToString()}
                 };
 
-            var content = new FormUrlEncodedContent(values);
-
-            var response = client.PostAsync(URL, content).Result;
-
-
-
-            var responseString = response.Content.ReadAsStringAsync().Result;
-            dynamic obj = JsonConvert.DeserializeObject<dynamic>(responseString);
+            dynamic obj = GetWebResponse(URL, values);
             game.status = obj.status;
             if (game.status == "ok")
             {
@@ -62,6 +54,16 @@ namespace LauncherClasses
             }
 
             return game;
+        }
+
+        public dynamic GetWebResponse(string URL, Dictionary<string, string> data)
+        {
+            HttpClient client = new HttpClient();
+            var content = new FormUrlEncodedContent(data);
+
+            var response = client.PostAsync(URL, content).Result;
+            var responseString = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<dynamic>(responseString);
         }
     }
 }

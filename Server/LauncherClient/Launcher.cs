@@ -1,4 +1,5 @@
-﻿using LauncherClient.Owin;
+﻿using LauncherClasses;
+using LauncherClient.Owin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -67,7 +68,24 @@ namespace LauncherClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SetConfigValue("Secret", "12345");
+            string computerKey = txtComputerKey.Text;
+            string baseUrl = txtUrl.Text;
+            SetConfigValue("ComputerKey", computerKey);
+            SetConfigValue("BaseURL", baseUrl);
+            // go get that secret key
+            GameCommand gc = new GameCommand();
+
+            Dictionary<string, string> data = new Dictionary<string, string>()
+            {
+                { "computer_key", computerKey },
+                { "current_time", DateTime.Now.ToString()}
+            };
+
+            dynamic obj = gc.GetWebResponse($"{baseUrl}/computers/getSecret", data);
+            if (obj.status == "ok")
+            {
+                SetConfigValue("Secret", obj.secret);
+            }
         }
     }
 }

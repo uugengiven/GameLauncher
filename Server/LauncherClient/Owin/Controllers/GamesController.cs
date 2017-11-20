@@ -17,7 +17,7 @@ namespace LauncherClient.Owin.Controllers
         public string StartGame(int id)
         {
             string baseURL = ConfigurationManager.AppSettings["BaseURL"];
-            string computerKey = ConfigurationManager.AppSettings["BaseURL"];
+            string computerKey = ConfigurationManager.AppSettings["ComputerKey"];
 
             string URL = $"{baseURL}/game/checkout/{id}";
             SteamGame game = gc.GetSteamLogin(id, URL, computerKey, "");
