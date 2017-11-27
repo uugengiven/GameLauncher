@@ -8,6 +8,7 @@ using Jose;
 using System.Security.Cryptography;
 using LauncherServerClasses;
 using System.Configuration;
+using Newtonsoft.Json;
 
 namespace LauncherServer.Controllers
 {
@@ -19,8 +20,12 @@ namespace LauncherServer.Controllers
         // GET: Game
         public ActionResult Index()
         {
-            return View();
-        }
+            var gameList = db.Games.ToList();
+            //SerializeObject allows us to convert something into Json (Derulo).
+            string result = JsonConvert.SerializeObject(gameList, 
+              new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+            return Content(result, "application/json");
+         }
 
         public JsonResult checkout( string computer_key, string current_time,  int security_code = 0, int id = 0)
         {
