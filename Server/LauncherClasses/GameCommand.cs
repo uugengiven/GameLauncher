@@ -56,6 +56,18 @@ namespace LauncherClasses
             return game;
         }
 
+        public bool CheckinUser(string URL, string computer_key)
+        {
+            var values = new Dictionary<string, string>
+                {
+                   { "computer_key", computer_key },
+                   { "current_time", DateTime.Now.ToString()}
+                };
+
+            dynamic obj = GetWebResponse(URL, values);
+            return true;
+        }
+
         public dynamic GetWebResponse(string URL, Dictionary<string, string> data)
         {
             HttpClient client = new HttpClient();
