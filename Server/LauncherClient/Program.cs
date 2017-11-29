@@ -31,5 +31,11 @@ namespace LauncherClient
             LauncherInfo.game = game;
             gameIsNew = true;
         }
+
+        static public void StopGame()
+        {
+            LauncherInfo.game = null;
+            gameIsNew = false;
+        }
     }
 }
