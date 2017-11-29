@@ -13,7 +13,7 @@ class Game extends Component {
     }
     render (){
         return(
-            <div className = "game" onClick= {this.startGame}>
+            <div className="game" onClick= {this.startGame}>
                 <span> {this.props.fullGame.name} </span> 
                 <p>
                 <img className="gameImage" src = {`http://cdn.akamai.steamstatic.com/steam/apps/${this.props.fullGame.steamId}/header.jpg?t=1510847069`}/> </p> 

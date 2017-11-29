@@ -15,6 +15,7 @@ namespace LauncherServer.Models
         public int steamId { get; set; }
         public string name { get; set; }
         public string exe { get; set; }
+        public string genre { get; set; }
         public virtual List<SteamUser> users { get; set; }
     }
 
