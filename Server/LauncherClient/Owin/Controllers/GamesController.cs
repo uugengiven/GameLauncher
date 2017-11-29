@@ -35,5 +35,16 @@ namespace LauncherClient.Owin.Controllers
         {
             return "ok";
         }
+
+        [HttpGet]
+        public string Checkin()
+        {
+            string baseURL = ConfigurationManager.AppSettings["BaseURL"];
+            string computerKey = ConfigurationManager.AppSettings["ComputerKey"];
+
+            string URL = $"{baseURL}/game/checkin";
+            gc.CheckinUser(URL, computerKey);
+            return "ok";
+        }
     }
 }
