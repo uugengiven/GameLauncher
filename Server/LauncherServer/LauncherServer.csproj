@@ -237,6 +237,10 @@
     <Compile Include="Migrations\LauncherDbContext\201711142214470_AddSecretToComputers.Designer.cs">
       <DependentUpon>201711142214470_AddSecretToComputers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\LauncherDbContext\201711292023313_addgenres.cs" />
+    <Compile Include="Migrations\LauncherDbContext\201711292023313_addgenres.Designer.cs">
+      <DependentUpon>201711292023313_addgenres.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LauncherDbContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GameModels.cs" />
@@ -363,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\LauncherDbContext\201711142214470_AddSecretToComputers.resx">
       <DependentUpon>201711142214470_AddSecretToComputers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\LauncherDbContext\201711292023313_addgenres.resx">
+      <DependentUpon>201711292023313_addgenres.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

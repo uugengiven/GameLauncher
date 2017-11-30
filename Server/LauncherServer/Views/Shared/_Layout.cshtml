@@ -9,14 +9,15 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top">  
+        <div class="container"> 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <img src="http://www.nextpittsburgh.com/wp-content/uploads/2015/10/11696239_723253717802340_549046177475283658_o.jpg" height="60" alt="">
                 @Html.ActionLink("License Admin", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
@@ -26,14 +27,15 @@
                     <li>@Html.ActionLink("Computers", "Index", "Computers")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
-            </div>
+                
+            </div> 
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Looking For Group</p>
         </footer>
     </div>
 

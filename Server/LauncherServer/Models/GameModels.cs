@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace LauncherServer.Models
 {
@@ -14,6 +15,7 @@ namespace LauncherServer.Models
         public int steamId { get; set; }
         public string name { get; set; }
         public string exe { get; set; }
+        public string genre { get; set; }
         public virtual List<SteamUser> users { get; set; }
     }
 
@@ -69,5 +71,13 @@ namespace LauncherServer.Models
     {
         public string status { get; set; }
         public string message { get; set; }
+    }
+
+    public class GameViewModel
+    {
+        public int id { get; set; }
+        public int steamId { get; set; }
+        public string name { get; set; }
+        public string exe { get; set; }
     }
 }

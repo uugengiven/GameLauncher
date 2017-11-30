@@ -27,3 +27,21 @@ li {
     display: block;
     list-style-type: none;
 }
+
+.logo {
+    height: 200px;
+}
+
+.gif {
+    display: block; 
+    margin: 0 auto; 
+}
+
+h2 {
+    text-align: center; 
+    color: white; 
+}
+
+.background {
+    background-image: url(http://blog.adacore.com/uploads/_2400x1200_crop_center-center/tetris-background.jpg); 
+}
