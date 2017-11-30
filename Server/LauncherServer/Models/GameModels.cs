@@ -72,4 +72,12 @@ namespace LauncherServer.Models
         public string status { get; set; }
         public string message { get; set; }
     }
+
+    public class GameViewModel
+    {
+        public int id { get; set; }
+        public int steamId { get; set; }
+        public string name { get; set; }
+        public string exe { get; set; }
+    }
 }
