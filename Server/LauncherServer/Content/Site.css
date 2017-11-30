@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url('backgroundcolor.png');
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -34,14 +35,26 @@ li {
 
 .gif {
     display: block; 
-    margin: 0 auto; 
+    height: 200px; 
 }
 
 h2 {
-    text-align: center; 
-    color: white; 
+    text-align: center;
+    color: black;
+    font-family: 'Spectral SC', serif;
+    background-color: lightgoldenrodyellow; 
 }
 
-.background {
-    background-image: url(http://blog.adacore.com/uploads/_2400x1200_crop_center-center/tetris-background.jpg); 
+.row {
+    font-family: 'Spectral SC', serif;
+}
+
+h1 {
+    font-family: 'Spectral SC', serif;
+}
+
+h3 {
+    font-family: 'Spectral SC', serif; 
+    color: black; 
+    text-align: center; 
 }
