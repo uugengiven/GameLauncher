@@ -21,8 +21,22 @@ namespace LauncherServer.Controllers
         public ActionResult Index()
         {
             var gameList = db.Games.ToList();
+            List<GameViewModel> finalList = new List<GameViewModel>();
+
+            foreach(var game in gameList)
+            {
+                GameViewModel temp = new GameViewModel();
+                temp.exe = game.exe;
+                temp.name = game.name;
+                temp.steamId = game.steamId;
+                temp.id = game.id;
+                finalList.Add(temp);
+            }
+           // var noUserInfoGameList = db.gameList.ToList(); 
+                // var finalGameList = some loop over gamelist and fill in the finalGameList
+
             //SerializeObject allows us to convert something into Json (Derulo).
-            string result = JsonConvert.SerializeObject(gameList, 
+            string result = JsonConvert.SerializeObject(finalList, 
               new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
             return Content(result, "application/json");
          }

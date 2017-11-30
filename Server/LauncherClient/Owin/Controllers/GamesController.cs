@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Configuration;
+using System.Web.Http.Results;
 
 namespace LauncherClient.Owin.Controllers
 {
@@ -48,9 +49,25 @@ namespace LauncherClient.Owin.Controllers
         }
 
         [HttpGet]
-        public string Status()
+
+        public ComputerStatus Status()
         {
-            return "running";
+            var status = new ComputerStatus();
+            if (LauncherInfo.game == null)
+            {
+                status.status = "ready";
+                status.message = "Hi there";
+            }
+            else
+            {
+                status.status = "running";
+                status.message = "Currently running a game";
+                status.game = new SteamGame();
+                status.game.name = LauncherInfo.game.name;
+                status.game.id = LauncherInfo.game.id;
+            }
+            
+            return status;
         }
     }
 }
