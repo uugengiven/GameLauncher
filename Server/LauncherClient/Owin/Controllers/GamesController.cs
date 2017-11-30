@@ -49,6 +49,7 @@ namespace LauncherClient.Owin.Controllers
         }
 
         [HttpGet]
+
         public ComputerStatus Status()
         {
             var status = new ComputerStatus();
