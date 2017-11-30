@@ -1,0 +1,40 @@
+Feature: List of Game Current Status
+
+When you click on a game, and it runs, the list of games will say that it is running that game. 
+If they try to run another game, it will say, "you are already running a game."
+If it isn't running a game, it will say, "please select which game you'd like to play."
+
+status: ready  not running a game
+status: running a game
+status: not connected to the launcher locally not connected
+
+currently:
+onclick game --> start game()
+
+what we want:
+onclick game --> start game(), redirect to new page, with game photo,
+    saying "You are currently running ${fullgame.name}."
+
+
+
+now we need to onclick game showStatus()
+
+showStatus(){
+    render(){
+        return(
+            className="status"
+            <span> {this.props.isRunning} </span>
+
+        )
+
+        if(isRunning)
+        {
+            return "This computer is already running ${fullGame.name}."
+        }
+
+        else
+        {
+            return "Please select a game you'd like to play."
+        }
+    }
+}

@@ -23,6 +23,7 @@
 }
 
 .game {
+ 
   display: inline-block; 
   border: solid 4px blue;
   border-radius: 3px;
@@ -32,11 +33,19 @@
 }
 
 .gameImage {
+
   width: 400px; 
   height: auto; 
 }
 
 span{
+  
   font-size: 12px; 
   font-family: 'Press Start 2P', cursive;
+}
+.sortby
+{
+  height: 200px;
+  padding-right: 200px;
+  
 }
