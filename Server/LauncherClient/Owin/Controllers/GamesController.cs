@@ -46,5 +46,11 @@ namespace LauncherClient.Owin.Controllers
             gc.CheckinUser(URL, computerKey);
             return "ok";
         }
+
+        [HttpGet]
+        public string Status()
+        {
+            return "running";
+        }
     }
 }

@@ -7,10 +7,19 @@ class Game extends Component {
         this.startGame = this.startGame.bind(this);
     }
     
-
-    startGame(){
-        axios.get(`http://localhost:8099/api/games/startgame/${this.props.fullGame.steamId}`)
-    }
+    startGame(steamId){
+        console.log("Ciao! Buongiorno!")
+        return function() {
+         axios.get(`http://localhost:8099/api/games/startgame/${steamId}`)
+         .then(function(response) {
+           console.log(response);
+          //here is where we will map out our responses
+         
+         }).catch(err => console.log(`Error: ${err}`));
+  
+   }
+ }
+//if in one state, return this (all options in the render function):    
     render (){
         return(
             <div className = "game" onClick= {this.startGame}>
