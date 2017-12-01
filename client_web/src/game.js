@@ -9,15 +9,12 @@ class Game extends Component {
     
     startGame(steamId){
         console.log("Ciao! Buongiorno!")
-        return function() {
-         axios.get(`http://localhost:8099/api/games/startgame/${steamId}`)
+        axios.get(`http://localhost:8099/api/games/startgame/${this.props.fullGame.steamId}`)
          .then(function(response) {
            console.log(response);
           //here is where we will map out our responses
          
          }).catch(err => console.log(`Error: ${err}`));
-  
-   }
  }
 //if in one state, return this (all options in the render function):    
     render (){

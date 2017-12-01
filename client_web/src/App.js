@@ -20,8 +20,18 @@ class App extends Component {
       this.get_games = this.get_games.bind(this);
       //you need this when working with functions only
       this.searchFunction = this.searchFunction.bind(this);
+      this.get_status = this.get_status.bind(this);
+      this.get_status();
     }
 
+    get_status() {
+      axios.get(`http://localhost:8099/api/games/status`).then(
+        (response) => {
+          this.setState({status: response.data.status, currentGame: response.data.game});
+          setTimeout(this.get_status, 1000);
+        }
+      );
+    }
   get_games(event) {
     axios.get(`http://localhost:61016/game`).then(
       (response) => {
@@ -85,7 +95,7 @@ class App extends Component {
       </div>      
     );
   }
-    else if(this.state.status === "anything else"){
+    else if(this.state.status === "running"){
       return (
         <div className="App">
           <header className="App-header">
