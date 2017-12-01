@@ -16,6 +16,11 @@ namespace LauncherClient
     public partial class Launcher : Form
     {
         private ApiHost host;
+        private GameCommand gc = new GameCommand();
+        private int gameStartDelay = 15; // number of grace seconds on starting a game
+        private int gameEndDelay = 5;
+        private int currStartDelay = 0;
+        private int currEndDelay = 0;
 
         public Launcher()
         {
@@ -44,6 +49,9 @@ namespace LauncherClient
 
         private void game_start_timer_Tick(object sender, EventArgs e)
         {
+            currStartDelay++;
+            
+
             if(LauncherInfo.gameIsNew)
             {
                 if (LauncherInfo.game.status == "ok")
@@ -53,6 +61,30 @@ namespace LauncherClient
                     notifyIcon.ShowBalloonTip(1000);
                 }
                 LauncherInfo.gameIsNew = false;
+                currStartDelay = 0;
+                currEndDelay = 0;
+                // set some kind of timeout
+            }
+
+            if (LauncherInfo.game != null)
+            {
+                string baseURL = ConfigurationManager.AppSettings["BaseURL"];
+                string computerKey = ConfigurationManager.AppSettings["ComputerKey"];
+
+                if (currStartDelay > gameStartDelay)
+                {
+                    if (!gc.isGameRunning(LauncherInfo.game.exe))
+                    {
+                        currEndDelay++;
+                    }
+                }
+                if (currEndDelay > gameEndDelay)
+                {
+                    gc.CheckinUser($"{baseURL}/game/checkin", computerKey);
+                    gc.StopSteam();
+                    LauncherInfo.StopGame();
+                    currEndDelay = 0;
+                }
             }
         }
 

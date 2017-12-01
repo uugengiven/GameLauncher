@@ -19,6 +19,15 @@ namespace LauncherClasses
             return Process.Start(steamExe, $"-login {game.username} {game.password} -applaunch {game.id}");
         }
 
+        public bool isGameRunning(string exe)
+        {
+            var bleh = System.Diagnostics.Process.GetProcesses().ToList();
+            return (System.Diagnostics.Process.GetProcesses()
+                             .Where(x => x.ProcessName.ToLower()
+                                          .Contains(exe))
+                             .ToList().Count > 0);
+        }
+
         public void StopSteam()
         {
             Process.Start("taskkill", "/F /IM steam.exe");
@@ -54,6 +63,18 @@ namespace LauncherClasses
             }
 
             return game;
+        }
+
+        public bool CheckinUser(string URL, string computer_key)
+        {
+            var values = new Dictionary<string, string>
+                {
+                   { "computer_key", computer_key },
+                   { "current_time", DateTime.Now.ToString()}
+                };
+
+            dynamic obj = GetWebResponse(URL, values);
+            return true;
         }
 
         public dynamic GetWebResponse(string URL, Dictionary<string, string> data)

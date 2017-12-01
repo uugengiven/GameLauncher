@@ -15,4 +15,11 @@ namespace LauncherClasses
         public string name { get; set; }
         public string status { get; set; }
     }
+
+    public class ComputerStatus
+    {
+        public string status { get; set; }
+        public string message { get; set; }
+        public SteamGame game { get; set; }
+    }
 }
