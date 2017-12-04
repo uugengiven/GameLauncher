@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using LauncherServer.Models;
 using LauncherServerClasses;
 using System.Configuration;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace LauncherServer.Controllers
 {
@@ -16,6 +18,39 @@ namespace LauncherServer.Controllers
     {
         private LauncherDbContext db = new LauncherDbContext();
         private Encryption encryption = new Encryption(ConfigurationManager.AppSettings["CryptKey"]);
+
+        // GET: GetSecret
+        public ActionResult GetSecret(string computer_key, string user, string pass)
+        {
+            var result = new StatusViewModel();
+            var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var dbUser = userManager.FindByEmailAsync(user).Result;
+
+
+
+            if (userManager.CheckPasswordAsync(dbUser, pass).Result)
+            {
+                // should check if it is an admin here too
+                var computer = db.Computers.Where(c => c.key == computer_key).FirstOrDefault();
+                if (computer != null)
+                {
+                    result.status = "ok";
+                    result.message = computer.secret;
+                }
+                else
+                {
+                    result.status = "error";
+                    result.message = "Key doesn't match computer";
+                }
+            }
+            else
+            {
+                result.status = "error";
+                result.message = "Invalid user/pass";
+            }
+            return new JsonResult() { Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         // GET: Computers
         public ActionResult Index()

@@ -45,6 +45,7 @@ namespace LauncherClient.Owin.Controllers
 
             string URL = $"{baseURL}/game/checkin";
             gc.CheckinUser(URL, computerKey);
+            LauncherInfo.StopGame();
             return "ok";
         }
 
