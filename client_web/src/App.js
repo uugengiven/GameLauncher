@@ -3,6 +3,7 @@ import logo from './newlogo.png';
 import './App.css';
 import axios from 'axios';
 import Game from './game';
+import GameUsed from './gameused';
 
 class App extends Component {
     constructor(props) {
@@ -86,7 +87,6 @@ class App extends Component {
         </header>
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
-        <button type="submit" onClick={this.searchFunction}>Click to Search</button>
         <span>                     </span>
           <button className="sortBy" >Filter by genre</button>
           
@@ -104,7 +104,7 @@ class App extends Component {
           <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">You are currently playing {this.state.currentGame.name}</h1>
-          <Game fullGame={this.state.currentGame}/>
+          <GameUsed fullGame={this.state.currentGame}/>
         </header>
       </div>
     );
