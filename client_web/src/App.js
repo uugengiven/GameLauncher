@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './lfglogo.svg.jpg';
+import logo from './newlogo.png';
 import './App.css';
 import axios from 'axios';
 import Game from './game';
@@ -78,8 +78,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to LFG! Please select a game!</h1>
+
+          <h1 className="App-title">Welcome to LFG's Game Portal </h1>
+
         </header>
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>

@@ -3,19 +3,33 @@
 }
 
 .App-logo {
-  height: 120px;
+  height: 60px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: ghostwhite;
+  height: 60px;
   padding: 20px;
-  color: white;
+  color: rgba(169, 169, 169, 1);
+}
+
+.App-logo {
+  float: left; 
+}
+
+.App-header.img {
+  float: left; 
 }
 
 .App-title {
-  font-size: 1.2em;
-  font-family: 'Press Start 2P', cursive;
+  font-size: 28px;
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 1.2px; 
+}
+
+.App-header h2 {
+  font-size: 28px;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .App-intro {
@@ -23,29 +37,71 @@
 }
 
 .game {
- 
+  transition: box-shadow .6s;
+  transition: top .6s; 
+  transition: left .6s;  
   display: inline-block; 
-  border: solid 4px blue;
-  border-radius: 3px;
-  background-color:  grey;
+  background-color:  #78B9CC;
   margin: 10px; 
-  box-shadow: 10px 10px black; 
+  width: 250px; 
+  box-shadow: 4px 4px rgba(143, 142, 142, 0.397);
+  position: relative;   
+  padding: 5px; 
+  border-radius: 5px; 
+}
+
+.game:hover {
+  box-shadow: 6px 6px rgba(15, 13, 13, 0.582); 
+  top: -2px; 
+  left: -2px; 
+  cursor: pointer;
 }
 
 .gameImage {
-
-  width: 400px; 
-  height: auto; 
+  width: 100%; 
+  height: auto;
+  padding: 5px 0px 0px 0px; 
 }
 
 span{
-  
-  font-size: 12px; 
-  font-family: 'Press Start 2P', cursive;
+  font-size: 14px; 
+  font-family: 'Roboto Mono', monospace;
+  color: black; 
 }
+
 .sortby
 {
   height: 200px;
   padding-right: 200px;
-  
+}
+
+.playButton {
+  font-size: 50px; 
+  opacity: 0.40; 
+  -webkit-text-fill-color: white; 
+  position: absolute; 
+  top: 60px;
+  left: 110px; 
+}
+
+.playButton:hover {
+  opacity: 0.86; 
+}
+
+.search {
+  background-color: #60DA7D; 
+  border-radius: 5px; 
+  font-family: 'Roboto Mono', monospace;
+  cursor:pointer; 
+}
+
+.sortBy {
+  border-radius: 5px; 
+  background-color: #60DA7D; 
+  font-family: 'Roboto Mono', monospace;
+  cursor: pointer; 
+}
+
+.inputBox { 
+  margin: 4px 4px 4px 4px; 
 }
