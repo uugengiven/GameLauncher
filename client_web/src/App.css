@@ -105,3 +105,17 @@ span{
 .inputBox { 
   margin: 4px 4px 4px 4px; 
 }
+
+.gameUsed {
+  transition: box-shadow .6s;
+  transition: top .6s; 
+  transition: left .6s;  
+  display: inline-block; 
+  background-color:  pink;
+  margin: 10px; 
+  width: 250px; 
+  box-shadow: 4px 4px rgba(143, 142, 142, 0.397);
+  position: relative;   
+  padding: 5px; 
+  border-radius: 5px; 
+}
