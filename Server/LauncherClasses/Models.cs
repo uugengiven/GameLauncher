@@ -15,6 +15,7 @@ namespace LauncherClasses
         public string exe { get; set; }
         public string name { get; set; }
         public string status { get; set; }
+        public string message { get; set; }
     }
 
     public class ComputerStatus

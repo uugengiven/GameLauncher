@@ -46,6 +46,8 @@ namespace LauncherClasses
 
             dynamic obj = GetWebResponse(URL, values);
             game.status = obj.status;
+            game.message = obj.message; 
+
             if (game.status == "ok")
             {
                 // do some look up for a user/pass
@@ -57,11 +59,8 @@ namespace LauncherClasses
                 // web request to server to return valid user/pass
 
                 // Hit the server application at /api/checkout/{id}
-                // Once user/pass is returned, plug them into the StartSteam call
-
-                
+                // Once user/pass is returned, plug them into the StartSteam call   
             }
-
             return game;
         }
 

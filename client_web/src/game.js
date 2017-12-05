@@ -8,10 +8,9 @@ class Game extends Component {
     }
     
     startGame(steamId){
-        console.log("Ciao! Buongiorno!")
         axios.get(`http://localhost:8099/api/games/startgame/${this.props.fullGame.steamId}`)
          .then(function(response) {
-           console.log(response);
+           console.log(response.data);
           //here is where we will map out our responses
          
          }).catch(err => console.log(`Error: ${err}`));

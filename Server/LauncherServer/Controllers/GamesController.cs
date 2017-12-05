@@ -118,7 +118,7 @@ namespace LauncherServer.Controllers
 
         public ActionResult AllGames()
         {
-            var result = JsonConvert.SerializeObject(db.Games.ToList(), Formatting.None,
+            var result = JsonConvert.SerializeObject(db.Games.OrderBy(g => g.name).ToList(), Formatting.None,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
