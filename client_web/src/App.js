@@ -3,6 +3,7 @@ import logo from './newlogo.png';
 import './App.css';
 import axios from 'axios';
 import Game from './game';
+import GameUsed from './gameused';
 
 class App extends Component {
     constructor(props) {
@@ -11,9 +12,10 @@ class App extends Component {
       this.state = { 
         games: [],
         status: "ready",
+        filterGames: [],
         currentGame: {
           name: "Overcooked",
-          steamId: 448510 ,
+          steamId: 448510, 
         }
     };
       this.get_games = this.get_games.bind(this);
@@ -47,7 +49,7 @@ class App extends Component {
 
             return -1; 
         })
-        this.setState({games: response.data})   
+        this.setState({games: response.data, filterGames: response.data})   
       }
     ).catch(error => console.warn(`get_games ${error}`));
   }
@@ -59,12 +61,13 @@ class App extends Component {
   }
 
   searchFunction(){
-    var searchResults = this.state.games.filter((variable) => {
-      return variable.name.includes(this.state.searchText)
+    this.state.filterGames = this.state.games;
+    var searchResults = this.state.filterGames.filter((variable) => {
+      return variable.name.toLowerCase().includes(this.state.searchText.toLowerCase());
         
     })
     //console.log (this.state.searchText)
-    this.setState({games: searchResults})
+    this.setState({filterGames: searchResults})
 
   }
 
@@ -83,13 +86,12 @@ class App extends Component {
 
         </header>
         <h2>
-        <input value={this.state.searchText}type="text" onChange={e => this.setState({searchText: e.target.value})} id="variable" placeholder="Search" className="inputBox"></input>
-        <button type="submit" className= "search" onClick={this.searchFunction}>Click to Search</button>
+        <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
         <span>                     </span>
           <button className="sortBy" >Filter by genre</button>
           
         </h2>
-        {this.state.games.map((game, index) => {
+        {this.state.filterGames.map((game, index) => {
           return <Game fullGame={game} key={index} startGame={this.startGame} />;
         } )
         }
@@ -102,7 +104,7 @@ class App extends Component {
           <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">You are currently playing {this.state.currentGame.name}</h1>
-          <Game fullGame={this.state.currentGame}/>
+          <GameUsed fullGame={this.state.currentGame}/>
         </header>
       </div>
     );
