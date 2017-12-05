@@ -24,6 +24,7 @@ class App extends Component {
       //you need this when working with functions only
       this.searchFunction = this.searchFunction.bind(this);
       this.get_status = this.get_status.bind(this);
+      this.setErrorValues = this.setErrorValues.bind(this); 
       this.get_status();
     }
 
@@ -56,7 +57,9 @@ class App extends Component {
     ).catch(error => console.warn(`get_games ${error}`));
   }
 
-
+  setErrorValues(status, message) {
+    this.setState({errorStatus: status, errorMessage: message})
+  }
 
   componentWillMount() {
     this.get_games()
@@ -81,8 +84,9 @@ class App extends Component {
     var errorBox = "" ;
     if (this.state.errorStatus === "failed")
     {
-      errorBox = <div className= "errorMessage">WORDS IN THE DIV SO I CAN SEE IT</div> 
+      errorBox = <div className = "errorMessage"> {this.state.errorMessage} <br></br> <button className="okButton" onClick={e => {this.setState({errorStatus: "ok"})}} type="submit">Ok</button></div> 
     }
+
     if (this.state.status === "ready"){
     return (
       <div className="App">
@@ -104,7 +108,7 @@ class App extends Component {
           <button className="sortBy" >Filter by genre</button>
         </h2>
         {this.state.filterGames.map((game, index) => {
-          return <Game fullGame={game} key={index} startGame={this.startGame} />;
+          return <Game fullGame={game} key={index} setErrorValues={this.setErrorValues} />;
         } )
         }
       </div>      
