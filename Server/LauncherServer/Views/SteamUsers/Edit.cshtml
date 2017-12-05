@@ -34,24 +34,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.salt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.salt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.salt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.inUse, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.inUse)
-                    @Html.ValidationMessageFor(model => model.inUse, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
             <label class="control-label col-md-2">Games</label>
             <div class="col-md-10">
                 <div id="games_list"></div>
@@ -75,8 +57,17 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
+    @{ 
+        string stringGame = "";
+        foreach (var game in Model.games)
+        {
+            stringGame += game.id + ","; 
+        }
+    }
+
     <script>
-        game_ids = [];
+        game_ids = [@stringGame];
+        $("#game_ids").val(game_ids.toString());
 
         function GetGames() {
         $.ajax({
@@ -85,9 +76,16 @@
             success: function (data) {
                 var games = $("#games_list");
                 data.map(function (game) { 
-                    games.append(`<li id="game-${game.id}"><span id="gamespan-${game.id}" class="fa fa-close">${game.name}</span></li>`);
-                    $(`#gamespan-${game.id}`).click(function () { Toggle(game.id); });
-                    });
+                    if (game_ids.includes(game.id)) {
+                        games.append(`<li id="game-${game.id}"><span id="gamespan-${game.id}" class="fa fa-check">${game.name}</span></li>`);
+                        $(`#gamespan-${game.id}`).click(function () { Toggle(game.id); });
+                        console.log(game.id); 
+                    }
+                    else {
+                        games.append(`<li id="game-${game.id}"><span id="gamespan-${game.id}" class="fa fa-close">${game.name}</span></li>`);
+                        $(`#gamespan-${game.id}`).click(function () { Toggle(game.id); });
+                    }
+                });
             }
         });
         }

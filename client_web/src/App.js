@@ -13,6 +13,8 @@ class App extends Component {
         games: [],
         status: "ready",
         filterGames: [],
+        errorMessage: "Burb McBurb Burb", 
+        errorStatus: "ok", 
         currentGame: {
           name: "Overcooked",
           steamId: 448510, 
@@ -75,6 +77,12 @@ class App extends Component {
     //if this.state.status = ready, then return below
     //else, return whatever status
     //create a function that does the return/ if then for you
+    //create a new variable that is going to hold an error message/box
+    var errorBox = "" ;
+    if (this.state.errorStatus === "failed")
+    {
+      errorBox = <div className= "errorMessage">WORDS IN THE DIV SO I CAN SEE IT</div> 
+    }
     if (this.state.status === "ready"){
     return (
       <div className="App">
@@ -85,11 +93,15 @@ class App extends Component {
           <h1 className="App-title">Welcome to LFG's Game Portal </h1>
 
         </header>
+
+      {
+        errorBox
+      }
+
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
         <span>                     </span>
           <button className="sortBy" >Filter by genre</button>
-          
         </h2>
         {this.state.filterGames.map((game, index) => {
           return <Game fullGame={game} key={index} startGame={this.startGame} />;
