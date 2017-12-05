@@ -30,6 +30,7 @@ namespace LauncherServer.Controllers
                 temp.name = game.name;
                 temp.steamId = game.steamId;
                 temp.id = game.id;
+                temp.genre = game.genre;
                 finalList.Add(temp);
             }
            // var noUserInfoGameList = db.gameList.ToList(); 
