@@ -3,6 +3,7 @@ import logo from './newlogo.png';
 import './App.css';
 import axios from 'axios';
 import Game from './game';
+import GameUsed from './gameused';
 
 class App extends Component {
     constructor(props) {
@@ -12,7 +13,12 @@ class App extends Component {
         games: [],
         status: "ready",
         filterGames: [],
+<<<<<<< HEAD
         searchGenre: "action",
+=======
+        errorMessage: "Burb McBurb Burb", 
+        errorStatus: "ok", 
+>>>>>>> master
         currentGame: {
           name: "Overcooked",
           steamId: 448510, 
@@ -75,6 +81,12 @@ class App extends Component {
     //if this.state.status = ready, then return below
     //else, return whatever status
     //create a function that does the return/ if then for you
+    //create a new variable that is going to hold an error message/box
+    var errorBox = "" ;
+    if (this.state.errorStatus === "failed")
+    {
+      errorBox = <div className= "errorMessage">WORDS IN THE DIV SO I CAN SEE IT</div> 
+    }
     if (this.state.status === "ready"){
     return (
       <div className="App">
@@ -85,10 +97,15 @@ class App extends Component {
           <h1 className="App-title">Welcome to LFG's Game Portal </h1>
 
         </header>
+
+      {
+        errorBox
+      }
+
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
-        <button type="submit" onClick={this.searchFunction}>Click to Search</button>
         <span>                     </span>
+<<<<<<< HEAD
           <div class="dropdown"><button className="sortBy" onClick="myFunction()">Filter by genre</button>
           <div id="myDropdown" class="dropdown-content">
           <input type="text" placeholder="Search Genre" id="myInput" onkeyup="filterFunction()"></input>
@@ -104,6 +121,9 @@ class App extends Component {
           <a href="#">Strategy</a>
         </div>
       </div>
+=======
+          <button className="sortBy" >Filter by genre</button>
+>>>>>>> master
         </h2>
         {this.state.filterGames.map((game, index) => {
           return <Game fullGame={game} key={index} startGame={this.startGame} />;
@@ -118,7 +138,7 @@ class App extends Component {
           <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">You are currently playing {this.state.currentGame.name}</h1>
-          <Game fullGame={this.state.currentGame}/>
+          <GameUsed fullGame={this.state.currentGame}/>
         </header>
       </div>
     );

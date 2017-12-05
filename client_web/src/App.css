@@ -107,6 +107,7 @@ span{
   margin: 4px 4px 4px 4px; 
 }
 
+<<<<<<< HEAD
 .sortBy:hover{
   box-shadow: 6px 6px rgba(15, 13, 13, 0.582); 
   top: -2px; 
@@ -149,4 +150,23 @@ span{
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+=======
+.gameUsed {
+  transition: box-shadow .6s;
+  transition: top .6s; 
+  transition: left .6s;  
+  display: inline-block; 
+  background-color:  #78B9CC;
+  margin: 10px; 
+  width: 250px; 
+  box-shadow: 4px 4px rgba(143, 142, 142, 0.397);
+  position: relative;   
+  padding: 5px; 
+  border-radius: 5px; 
+}
+
+.errorMessage {
+  background-color: red; 
+  
+>>>>>>> master
 }

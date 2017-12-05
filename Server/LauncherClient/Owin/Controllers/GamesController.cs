@@ -10,25 +10,36 @@ using System.Web.Http.Results;
 
 namespace LauncherClient.Owin.Controllers
 {
+    public class StatusMessage
+    {
+        public string message { get; set; } 
+        public string status { get; set; }
+    }
+
     public class GamesController : ApiController
     {
         private GameCommand gc = new GameCommand();
 
         [HttpGet]
-        public string StartGame(int id)
+        public StatusMessage StartGame(int id)
         {
+            StatusMessage returnMessage = new StatusMessage();
+
             string baseURL = ConfigurationManager.AppSettings["BaseURL"];
             string computerKey = ConfigurationManager.AppSettings["ComputerKey"];
 
             string URL = $"{baseURL}/game/checkout/{id}";
             SteamGame game = gc.GetSteamLogin(id, URL, computerKey, "");
+            returnMessage.message = game.message;
+            returnMessage.status = game.status;
+
             if (game.status == "ok")
             {
                 LauncherInfo.StartGame(game);
 
                 gc.StartSteam(LauncherInfo.game);
             }
-            return game.status;
+            return returnMessage;
         }
 
         [HttpGet]

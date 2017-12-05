@@ -92,6 +92,12 @@
     <Compile Include="Owin\Startup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Launcher.aa-DJ.resx">
+      <DependentUpon>Launcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Launcher.en-US.resx">
+      <DependentUpon>Launcher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Launcher.resx">
       <DependentUpon>Launcher.cs</DependentUpon>
     </EmbeddedResource>
