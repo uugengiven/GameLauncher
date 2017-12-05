@@ -88,7 +88,6 @@ class App extends Component {
         <span>                     </span>
           <button className="sortBy" >Filter by genre</button>
           
-        
         </h2>
         {this.state.games.map((game, index) => {
           return <Game fullGame={game} key={index} startGame={this.startGame} />;
