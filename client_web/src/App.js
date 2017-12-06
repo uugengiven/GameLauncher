@@ -9,14 +9,15 @@ import SETTINGS from './settings';
 class App extends Component {
     constructor(props) {
       super(props);
-  
       this.state = { 
         games: [],
         status: "ready",
         filterGames: [],
         searchGenre: "",
+        searchText: "",
         errorMessage: "Burb McBurb Burb", 
         errorStatus: "ok", 
+        searchText:"",
         currentGame: {
           name: "Overcooked",
           steamId: 448510, 
@@ -69,6 +70,10 @@ class App extends Component {
     this.get_games()
   }
 
+  // myFunction(event) {
+  //   this.setState({searchGenre: event.target.value});
+  // }
+
   searchFunction(){
     this.state.filterGames = this.state.games;
     var searchResults = this.state.filterGames.filter((variable) => {
@@ -109,20 +114,27 @@ class App extends Component {
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
         <span>                     </span>
-          <div className="dropdown"><button className="sortBy" onClick={this.myFunction}>Filter by genre</button>
-          <div id="myDropdown" className="dropdown-content">
-          <input type="text" placeholder="Search Genre" id="myInput" onKeyUp={this.filterFunction}></input>
-          <a href="#">Action</a>
-          <a href="#">Adventure</a>
-          <a href="#">Casual</a>
-          <a href="#">Indie</a>
-          <a href="#">Massively Multiplier</a>
-          <a href="#">Racing</a>
-          <a href="#">RPG</a>
-          <a href="#">Simulation</a>
-          <a href="#">Sports</a>
-          <a href="#">Strategy</a>
-        </div>
+        <div className="dropdown">
+        
+        <label>
+          <select value={this.state.searchGenre} className="sortBy" onChange={e => {this.setState({searchGenre: e.target.value},this.searchFunction)}}>
+          
+          <option value="">Filter by Genre</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Casual">Casual</option>
+            <option value="Indie">Indie</option>
+            <option value="Massively Multiplier">Massively Multiplier</option>
+            <option value="Racing">Racing</option>
+            <option value="RPG">RPG</option>
+            <option value="Simulation">Simulation</option>
+            <option value="Sports">Sports</option>
+            <option value="Strategy">Strategy</option>
+            <option value="">Clear Filter</option>
+          </select>
+          </label>
+          
+        
       </div>
         </h2>
         {this.state.filterGames.map((game, index) => {
