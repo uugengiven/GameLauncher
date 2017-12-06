@@ -13,11 +13,16 @@ class App extends Component {
         games: [],
         status: "ready",
         filterGames: [],
+<<<<<<< HEAD
+        searchGenre: "action",
+=======
         errorMessage: "Burb McBurb Burb", 
         errorStatus: "ok", 
+>>>>>>> master
         currentGame: {
           name: "Overcooked",
           steamId: 448510, 
+
         }
     };
       this.get_games = this.get_games.bind(this);
@@ -26,6 +31,7 @@ class App extends Component {
       this.get_status = this.get_status.bind(this);
       this.setErrorValues = this.setErrorValues.bind(this); 
       this.get_status();
+            
     }
 
     get_status() {
@@ -57,10 +63,13 @@ class App extends Component {
     ).catch(error => console.warn(`get_games ${error}`));
   }
 
+<<<<<<< HEAD
   setErrorValues(status, message) {
     this.setState({errorStatus: status, errorMessage: message})
   }
 
+=======
+>>>>>>> origin/Kiragenrefilterstart
   componentWillMount() {
     this.get_games()
   }
@@ -68,8 +77,8 @@ class App extends Component {
   searchFunction(){
     this.state.filterGames = this.state.games;
     var searchResults = this.state.filterGames.filter((variable) => {
-      return variable.name.toLowerCase().includes(this.state.searchText.toLowerCase());
-        
+      return variable.name.toLowerCase().includes(this.state.searchText.toLowerCase())&& variable.genre.toLowerCase().includes(this.state.searchGenre.toLowerCase());
+
     })
     //console.log (this.state.searchText)
     this.setState({filterGames: searchResults})
@@ -105,7 +114,25 @@ class App extends Component {
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
         <span>                     </span>
+<<<<<<< HEAD
+          <div class="dropdown"><button className="sortBy" onClick="myFunction()">Filter by genre</button>
+          <div id="myDropdown" class="dropdown-content">
+          <input type="text" placeholder="Search Genre" id="myInput" onkeyup="filterFunction()"></input>
+          <a href="#">Action</a>
+          <a href="#">Adventure</a>
+          <a href="#">Casual</a>
+          <a href="#">Indie</a>
+          <a href="#">Massively Multiplier</a>
+          <a href="#">Racing</a>
+          <a href="#">RPG</a>
+          <a href="#">Simulation</a>
+          <a href="#">Sports</a>
+          <a href="#">Strategy</a>
+        </div>
+      </div>
+=======
           <button className="sortBy" >Filter by genre</button>
+>>>>>>> master
         </h2>
         {this.state.filterGames.map((game, index) => {
           return <Game fullGame={game} key={index} setErrorValues={this.setErrorValues} />;
