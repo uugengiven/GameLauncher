@@ -17,7 +17,7 @@ namespace LauncherClient
     {
         private ApiHost host;
         private GameCommand gc = new GameCommand();
-        private int gameStartDelay = 15; // number of grace seconds on starting a game
+        private int gameStartDelay = 30; // number of grace seconds on starting a game
         private int gameEndDelay = 5; // number of grace seconds for allowing a restart
         private int currStartDelay = 0;
         private int currEndDelay = 0;

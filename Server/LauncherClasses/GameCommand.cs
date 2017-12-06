@@ -30,7 +30,18 @@ namespace LauncherClasses
 
         public void StopSteam()
         {
-            Process.Start("taskkill", "/F /IM steam.exe");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "taskkill";
+            startInfo.Arguments = "/F /IM steam.exe";
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+
+            Process procTemp = new Process();
+            procTemp.StartInfo = startInfo;
+            procTemp.EnableRaisingEvents = true;
+            procTemp.Start();
+
+            //Process.Start("taskkill", "/F /IM steam.exe");
         }
 
         public SteamGame GetSteamLogin(int id, string URL, string computer_key, string secret)
