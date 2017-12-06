@@ -105,7 +105,13 @@ span{
 }
 
 .sortBy:hover{
+<<<<<<< HEAD
   box-shadow: 1px 1px 1px rgba(15, 13, 13, 0.582); 
+=======
+  box-shadow: 3px 3px rgba(15, 13, 13, 0.582); 
+  top: -2px; 
+  left: -2px; 
+>>>>>>> origin/stylingadminpages
   cursor: pointer; 
 }
 
@@ -122,7 +128,7 @@ span{
   background-color: #f6f6f6;
   min-width: 230px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
@@ -133,16 +139,6 @@ span{
   font-size: 16px;
   padding: 14px 20px 12px 45px;
   border: none;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
 }
 
 .gameUsed {
@@ -186,5 +182,5 @@ span{
 
 .okButton:hover {
   cursor: pointer;
-  background-color: red; 
+  background-color: darkgrey; 
 }
