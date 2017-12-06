@@ -1,5 +1,5 @@
 const SETTINGS = {
-    serverUrl: "http://192.168.1.10:8088/",
+    serverUrl: "http://localhost:61016/",
     clientUrl: "http://localhost:8099/"
 }
 
