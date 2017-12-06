@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import Game from './game';
 import GameUsed from './gameused';
+import SETTINGS from './settings';
 
 class App extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class App extends Component {
         games: [],
         status: "ready",
         filterGames: [],
-        searchGenre: "action",
+        searchGenre: "",
         errorMessage: "Burb McBurb Burb", 
         errorStatus: "ok", 
         currentGame: {
@@ -32,7 +33,7 @@ class App extends Component {
     }
 
     get_status() {
-      axios.get(`http://localhost:8099/api/games/status`).then(
+      axios.get(`${SETTINGS.clientUrl}api/games/status`).then(
         (response) => {
           this.setState({status: response.data.status, currentGame: response.data.game});
           setTimeout(this.get_status, 1000);
@@ -40,7 +41,7 @@ class App extends Component {
       );
     }
   get_games(event) {
-    axios.get(`http://localhost:61016/game`).then(
+    axios.get(`${SETTINGS.serverUrl}game`).then(
       (response) => {
         response.data.sort((a, b) => {
           if (a.name > b.name) 
@@ -108,9 +109,9 @@ class App extends Component {
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
         <span>                     </span>
-          <div class="dropdown"><button className="sortBy" onClick="myFunction()">Filter by genre</button>
-          <div id="myDropdown" class="dropdown-content">
-          <input type="text" placeholder="Search Genre" id="myInput" onkeyup="filterFunction()"></input>
+          <div className="dropdown"><button className="sortBy" onClick={this.myFunction}>Filter by genre</button>
+          <div id="myDropdown" className="dropdown-content">
+          <input type="text" placeholder="Search Genre" id="myInput" onKeyUp={this.filterFunction}></input>
           <a href="#">Action</a>
           <a href="#">Adventure</a>
           <a href="#">Casual</a>

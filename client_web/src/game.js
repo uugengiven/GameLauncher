@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Settings from './settings';
 
 class Game extends Component {
     constructor(props){
@@ -9,7 +10,7 @@ class Game extends Component {
     
     startGame(steamId){
         var self=this; 
-        axios.get(`http://localhost:8099/api/games/startgame/${this.props.fullGame.steamId}`)
+        axios.get(`${Settings.clientUrl}api/games/startgame/${this.props.fullGame.steamId}`)
          .then(function(response) {
            console.log(response.data);
           //here is where we will map out our responses
