@@ -84,7 +84,7 @@ class App extends Component {
     var errorBox = "" ;
     if (this.state.errorStatus === "failed")
     {
-      errorBox = <div className = "errorMessage"> {this.state.errorMessage} <br></br> <button className="okButton" onClick={e => {this.setState({errorStatus: "ok"})}} type="submit">Ok</button></div> 
+      errorBox = <div className = "errorMessage"> <div> {this.state.errorMessage} <br></br> <button className="okButton" onClick={e => {this.setState({errorStatus: "ok"})}} type="submit">Ok</button></div></div>  
     }
 
     if (this.state.status === "ready"){

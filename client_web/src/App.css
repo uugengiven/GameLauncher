@@ -115,17 +115,19 @@ span{
   background-color: #60DA7D; 
   font-family: 'Roboto Mono', monospace;
   height: 85px;
-  width: 40%;   
+  width: 30%;   
   position: fixed;
-  top: 30%; 
-  left: 30%; 
+  top: 35%; 
+  left: 35%; 
   z-index: 1;  
-  display: block; 
-  margin: 0 auto;
+  margin: auto;
   box-shadow: 4px 4px rgba(143, 142, 142, 0.397);
   padding: 10px; 
   border-radius: 5px; 
   font-size: 18px; 
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .okButton {
@@ -133,7 +135,7 @@ span{
   background-color: black; 
   font-family: 'Roboto Mono', monospace;
   cursor: pointer; 
-  color: white; 
+  color: white;   
 }
 
 .okButton:hover {
