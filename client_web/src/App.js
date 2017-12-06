@@ -13,12 +13,9 @@ class App extends Component {
         games: [],
         status: "ready",
         filterGames: [],
-<<<<<<< HEAD
         searchGenre: "action",
-=======
         errorMessage: "Burb McBurb Burb", 
         errorStatus: "ok", 
->>>>>>> master
         currentGame: {
           name: "Overcooked",
           steamId: 448510, 
@@ -63,13 +60,10 @@ class App extends Component {
     ).catch(error => console.warn(`get_games ${error}`));
   }
 
-<<<<<<< HEAD
   setErrorValues(status, message) {
     this.setState({errorStatus: status, errorMessage: message})
   }
 
-=======
->>>>>>> origin/Kiragenrefilterstart
   componentWillMount() {
     this.get_games()
   }
@@ -114,7 +108,6 @@ class App extends Component {
         <h2>
         <input value={this.state.searchText} type="text" onChange={e => {this.setState({searchText: e.target.value},this.searchFunction)}} id="variable" placeholder="Search"></input>
         <span>                     </span>
-<<<<<<< HEAD
           <div class="dropdown"><button className="sortBy" onClick="myFunction()">Filter by genre</button>
           <div id="myDropdown" class="dropdown-content">
           <input type="text" placeholder="Search Genre" id="myInput" onkeyup="filterFunction()"></input>
@@ -130,9 +123,6 @@ class App extends Component {
           <a href="#">Strategy</a>
         </div>
       </div>
-=======
-          <button className="sortBy" >Filter by genre</button>
->>>>>>> master
         </h2>
         {this.state.filterGames.map((game, index) => {
           return <Game fullGame={game} key={index} setErrorValues={this.setErrorValues} />;

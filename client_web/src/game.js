@@ -23,7 +23,7 @@ class Game extends Component {
              <span className="gameTitle"> {this.props.fullGame.name}</span> 
              <img className="gameImage" src = {`http://cdn.akamai.steamstatic.com/steam/apps/${this.props.fullGame.steamId}/header.jpg?t=1510847069`}  
              /> 
-             <div className="playButton" onClick={this.startGame}><span className="fa fa-play"></span></div> 
+             <div className="playButton"><span className="fa fa-play"></span></div> 
         </div> 
         )
     }
