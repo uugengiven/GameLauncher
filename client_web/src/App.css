@@ -105,13 +105,7 @@ span{
 }
 
 .sortBy:hover{
-<<<<<<< HEAD
   box-shadow: 1px 1px 1px rgba(15, 13, 13, 0.582); 
-=======
-  box-shadow: 3px 3px rgba(15, 13, 13, 0.582); 
-  top: -2px; 
-  left: -2px; 
->>>>>>> origin/stylingadminpages
   cursor: pointer; 
 }
 
