@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url('backgroundcolor.png');
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -26,4 +27,34 @@ textarea {
 li {
     display: block;
     list-style-type: none;
+}
+
+.logo {
+    height: 200px;
+}
+
+.gif {
+    display: block; 
+    height: 200px; 
+}
+
+h2 {
+    text-align: center;
+    color: black;
+    font-family: 'Spectral SC', serif;
+    background-color: lightgoldenrodyellow; 
+}
+
+.row {
+    font-family: 'Spectral SC', serif;
+}
+
+h1 {
+    font-family: 'Spectral SC', serif;
+}
+
+h3 {
+    font-family: 'Spectral SC', serif; 
+    color: black; 
+    text-align: center; 
 }

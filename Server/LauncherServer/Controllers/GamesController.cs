@@ -47,7 +47,7 @@ namespace LauncherServer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,steamId,name,exe")] Game game)
+        public ActionResult Create([Bind(Include = "id,steamId,name,exe,genre")] Game game)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace LauncherServer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,steamId,name,exe")] Game game)
+        public ActionResult Edit([Bind(Include = "id,steamId,name,exe,genre")] Game game)
         {
             if (ModelState.IsValid)
             {

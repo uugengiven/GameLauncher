@@ -3,8 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 120px;
 }
 
 .App-header {
@@ -15,14 +14,38 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 1.2em;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .App-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.game {
+ 
+  display: inline-block; 
+  border: solid 4px blue;
+  border-radius: 3px;
+  background-color:  grey;
+  margin: 10px; 
+  box-shadow: 10px 10px black; 
+}
+
+.gameImage {
+
+  width: 400px; 
+  height: auto; 
+}
+
+span{
+  
+  font-size: 12px; 
+  font-family: 'Press Start 2P', cursive;
+}
+.sortby
+{
+  height: 200px;
+  padding-right: 200px;
+  
 }
