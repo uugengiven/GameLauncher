@@ -4,6 +4,7 @@
 
 .App-logo {
   height: 60px;
+  float: left; 
 }
 
 .App-header {
@@ -11,10 +12,6 @@
   height: 60px;
   padding: 20px;
   color: rgba(169, 169, 169, 1);
-}
-
-.App-logo {
-  float: left; 
 }
 
 .App-header.img {
@@ -69,12 +66,6 @@ span{
   color: black; 
 }
 
-.sortby
-{
-  height: 200px;
-  padding-right: 200px;
-}
-
 .playButton {
   font-size: 50px; 
   opacity: 0.40; 
@@ -121,6 +112,30 @@ span{
 }
 
 .errorMessage {
-  background-color: red; 
-  
+  background-color: #60DA7D; 
+  font-family: 'Roboto Mono', monospace;
+  height: 85px;
+  width: 40%;   
+  position: fixed;
+  top: 30%; 
+  left: 30%; 
+  z-index: 1;  
+  display: block; 
+  margin: 0 auto;
+  box-shadow: 4px 4px rgba(143, 142, 142, 0.397);
+  padding: 10px; 
+  border-radius: 5px; 
+  font-size: 18px; 
+}
+
+.okButton {
+  border-radius: 5px; 
+  background-color: black; 
+  font-family: 'Roboto Mono', monospace;
+  cursor: pointer; 
+  color: white; 
+}
+
+.okButton:hover {
+  cursor: pointer;
 }
