@@ -9,12 +9,12 @@ import SETTINGS from './settings';
 class App extends Component {
     constructor(props) {
       super(props);
-  
       this.state = { 
         games: [],
         status: "ready",
         filterGames: [],
         searchGenre: "",
+        searchText: "",
         errorMessage: "Burb McBurb Burb", 
         errorStatus: "ok", 
         searchText:"",
