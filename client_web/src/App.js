@@ -11,11 +11,11 @@ class App extends Component {
       super(props);
       this.state = { 
         games: [],
-        status: "ready",
+        status: "not connected",
         filterGames: [],
         searchGenre: "",
         searchText: "",
-        errorMessage: "Burb McBurb Burb", 
+        errorMessage: "", 
         errorStatus: "ok", 
         searchText:"",
         currentGame: {
@@ -29,8 +29,7 @@ class App extends Component {
       this.searchFunction = this.searchFunction.bind(this);
       this.get_status = this.get_status.bind(this);
       this.setErrorValues = this.setErrorValues.bind(this); 
-      this.get_status();
-            
+      this.get_status();         
     }
 
     get_status() {
@@ -160,7 +159,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">This computer is not connected.</h1>
+            <h1 className="App-title">This computer is not connected. Please reach out to Ed. </h1>
           </header>
         </div>
       );
