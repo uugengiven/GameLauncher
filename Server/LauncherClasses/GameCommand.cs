@@ -19,9 +19,29 @@ namespace LauncherClasses
             return Process.Start(steamExe, $"-login {game.username} {game.password} -applaunch {game.id}");
         }
 
+        public bool isGameRunning(string exe)
+        {
+            var bleh = System.Diagnostics.Process.GetProcesses().ToList();
+            return (System.Diagnostics.Process.GetProcesses()
+                             .Where(x => x.ProcessName.ToLower()
+                                          .Contains(exe))
+                             .ToList().Count > 0);
+        }
+
         public void StopSteam()
         {
-            Process.Start("taskkill", "/F /IM steam.exe");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "taskkill";
+            startInfo.Arguments = "/F /IM steam.exe";
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+
+            Process procTemp = new Process();
+            procTemp.StartInfo = startInfo;
+            procTemp.EnableRaisingEvents = true;
+            procTemp.Start();
+
+            //Process.Start("taskkill", "/F /IM steam.exe");
         }
 
         public SteamGame GetSteamLogin(int id, string URL, string computer_key, string secret)
@@ -37,6 +57,8 @@ namespace LauncherClasses
 
             dynamic obj = GetWebResponse(URL, values);
             game.status = obj.status;
+            game.message = obj.message; 
+
             if (game.status == "ok")
             {
                 // do some look up for a user/pass
@@ -48,12 +70,21 @@ namespace LauncherClasses
                 // web request to server to return valid user/pass
 
                 // Hit the server application at /api/checkout/{id}
-                // Once user/pass is returned, plug them into the StartSteam call
-
-                
+                // Once user/pass is returned, plug them into the StartSteam call   
             }
-
             return game;
+        }
+
+        public bool CheckinUser(string URL, string computer_key)
+        {
+            var values = new Dictionary<string, string>
+                {
+                   { "computer_key", computer_key },
+                   { "current_time", DateTime.Now.ToString()}
+                };
+
+            dynamic obj = GetWebResponse(URL, values);
+            return true;
         }
 
         public dynamic GetWebResponse(string URL, Dictionary<string, string> data)

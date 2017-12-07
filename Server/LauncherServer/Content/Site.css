@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: ghostwhite;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -26,4 +27,59 @@ textarea {
 li {
     display: block;
     list-style-type: none;
+}
+
+.gif {
+    display: block; 
+    height: 200px; 
+}
+
+h2 {
+    text-align: center;
+    color: black;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.row {
+    font-family: 'Roboto Mono', monospace;
+}
+
+h1 {
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+}
+
+h3 {
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    text-align: center;
+}
+
+.headerButtons {
+    font-family: 'Roboto Mono', monospace;
+    letter-spacing: 1.2px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 15px 0px 0px;
+    height: 60px;
+}
+
+.headerButtons:hover {
+    background-color: #60DA7D;
+}
+
+#manageButtons {
+    background-color: #78B9CC;
+}
+
+#headerBar {
+    background-color: ghostwhite; 
+}
+
+p {
+    font-family: 'Roboto Mono', monospace; 
+}
+
+.row {
+    background-color: black; 
+    height: 500px; 
 }

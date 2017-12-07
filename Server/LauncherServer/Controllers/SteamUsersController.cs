@@ -49,19 +49,31 @@ namespace LauncherServer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,username,password")] SteamUser steamUser)
+        public ActionResult Create([Bind(Include = "id,username,password")] SteamUser steamUser, string game_ids)
         {
             if (ModelState.IsValid)
             {
+                string[] gameIds = game_ids.Split(',');
                 steamUser.salt = encryption.getSalt(32);
                 steamUser.password = encryption.Encrypt(steamUser.password, steamUser.salt);
                 steamUser.password = encryption.Encrypt(steamUser.password);
                 db.SteamUsers.Add(steamUser);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (steamUser.games == null)
+                {
+                    steamUser.games = new List<Game>();
+                }
+                else
+                {
+                    steamUser.games.Clear();
+                }
+                foreach (string id in gameIds)
+                {
+                    steamUser.games.Add(db.Games.Find(Convert.ToInt32(id)));
+                }
+                db.SaveChanges();
             }
-
-            return View(steamUser);
+            return Redirect("Index");
         }
 
         // GET: SteamUsers/Edit/5
@@ -84,14 +96,13 @@ namespace LauncherServer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,username,password,inUse")] SteamUser steamUser, string game_ids, bool update_password = false)
+        public ActionResult Edit([Bind(Include = "id,username,password")] SteamUser steamUser, string game_ids, bool update_password = false)
         {
             if (ModelState.IsValid)
             {
                 SteamUser user = db.SteamUsers.Find(steamUser.id);
                 string[] gameIds = game_ids.Split(',');
                 user.username = steamUser.username;
-                user.inUse = steamUser.inUse;
                 if (update_password)
                 {
                     user.password = encryption.Encrypt(steamUser.password, user.salt);
